@@ -1,9 +1,9 @@
 <view class="nav-bar" style="padding-top: {{navBarTop}}px;">
   <view class="nav-content" style="height: {{capsuleHeight}}px;">
-    <view wx:if="{{showBack}}" class="nav-back" bindtap="onBack">‹</view>
-    <view class="nav-copy">
-      <text class="nav-title">{{title}}</text>
+    <view wx:if="{{showBack}}" class="nav-back glass-back" bindtap="onBack">
+      <text class="nav-back-icon">‹</text>
     </view>
+    <text class="nav-title">{{title}}</text>
     <view class="nav-spacer" style="width: {{capsuleWidth}}px;"></view>
   </view>
 </view>

@@ -3,23 +3,31 @@
 
   <view class="page-content home-content">
     <view class="page-lead">
-      <text class="page-lead-title">今天出门，先给衣柜一点小灵感。</text>
-      <text class="page-lead-copy">挑一个马上要去的局，让颜色、材质和小细节自己冒出来。</text>
+      <text class="page-lead-title">今天出门，先给衣柜一点小灵感</text>
+      <text class="page-lead-copy">挑一个局，颜色和小心机自己冒出来</text>
     </view>
 
     <view class="hero-card home-hero">
-      <view class="sticker">OOTD</view>
-      <text class="home-hero-title">{{currentScene.name}}</text>
-      <text class="home-hero-subtitle">{{currentScene.intro}}</text>
-      <view class="weather-status weather-status--{{weatherContext.status}}">
-        <text class="weather-status-label">天气灵感</text>
-        <text class="weather-status-title">{{weatherTitle}}</text>
-        <text class="weather-status-detail">{{weatherDetail}}</text>
+      <view class="hero-sun-glow"></view>
+      <view class="hero-bubbles" aria-hidden="true">
+        <view class="hero-bubble hero-bubble--one"></view>
+        <view class="hero-bubble hero-bubble--two"></view>
+        <view class="hero-bubble hero-bubble--three"></view>
       </view>
+      <view class="home-hero-top">
+        <view class="home-hero-left">
+          <view class="sticker">OOTD</view>
+          <text class="home-hero-title">{{currentScene.name}}</text>
+        </view>
+        <view class="weather-status weather-status--{{weatherContext.status}}">
+          <text class="weather-status-title">{{weatherTitle}}</text>
+          <text class="weather-status-detail">{{weatherDetail}}</text>
+        </view>
+      </view>
+      <text class="home-hero-subtitle">{{currentScene.intro}}</text>
       <view class="hero-badges">
         <text class="hero-badge">{{currentScene.mood}}</text>
         <text class="hero-badge">{{currentScene.buttonText}}</text>
-        <text class="hero-badge">小人试衣</text>
       </view>
     </view>
 
@@ -50,7 +58,7 @@
       </scroll-view>
     </view>
 
-    <button class="primary-button generate-btn" bindtap="goGenerate">抽一套今日出门感</button>
-    <button class="secondary-button" bindtap="goFavorites">翻翻我的心动衣架</button>
+    <button class="primary-button generate-btn" bindtap="goGenerate">抽一套</button>
+    <button class="secondary-button" bindtap="goFavorites">心动衣架</button>
   </view>
 </view>

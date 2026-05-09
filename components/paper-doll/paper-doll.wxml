@@ -2,11 +2,22 @@
   <view class="paper-aura"></view>
   <view class="paper-stand"></view>
   <view class="paper-shadow"></view>
+
+  <!-- Floating decorations -->
+  <view class="deco deco-heart-a">❤</view>
+  <view class="deco deco-heart-b">❤</view>
+  <view class="deco deco-star-a">★</view>
+  <view class="deco deco-star-b">★</view>
+  <view class="deco deco-star-c">✦</view>
+  <view class="deco deco-sparkle-a">✧</view>
+  <view class="deco deco-sparkle-b">✧</view>
+
   <view class="paper-doll">
     <view class="spark spark-a"></view>
     <view class="spark spark-b"></view>
     <view class="spark spark-c"></view>
     <view class="spark spark-d"></view>
+    <view class="spark spark-e"></view>
     <view class="hair-back"></view>
     <view class="body-head"></view>
     <view class="hair"></view>
@@ -27,6 +38,6 @@
     <view wx:if="{{look.layers.bottom}}" class="garment bottom {{look.layers.bottom.shape}} {{look.layers.bottom.colorClass}} {{look.layers.bottom.materialClass}} {{look.layers.bottom.paletteClass}} {{look.layers.bottom.textureKey}}"></view>
     <view wx:if="{{look.layers.outerwear}}" class="garment outerwear {{look.layers.outerwear.shape}} {{look.layers.outerwear.colorClass}} {{look.layers.outerwear.materialClass}} {{look.layers.outerwear.paletteClass}} {{look.layers.outerwear.textureKey}}"></view>
 
-    <view wx:if="{{look.layers.accessory}}" class="accessory {{look.layers.accessory.shape}}"></view>
+    <view wx:if="{{look.layers.accessory}}" class="accessory accessory--spread {{look.layers.accessory.shape}}"></view>
   </view>
 </view>

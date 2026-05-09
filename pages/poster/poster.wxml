@@ -3,8 +3,8 @@
 
   <view wx:if="{{poster}}" class="page-content poster-content">
     <view class="page-lead">
-      <text class="page-lead-title">把今天的漂亮灵感，轻轻收进相册。</text>
-      <text class="page-lead-copy">右上角一颗存图，一颗重抽，发给姐妹刚刚好。</text>
+      <text class="page-lead-title">收进相册</text>
+      <text class="page-lead-copy">存图或重抽，发给姐妹刚好</text>
     </view>
 
     <view class="hero-card poster-card">
@@ -37,7 +37,7 @@
       <text class="poster-footer">今日出门灵感 · 发给姐妹一起挑漂亮</text>
     </view>
 
-    <text class="poster-status">{{exportReadyPath ? '小海报已经躺进待存区啦。' : '右上角可以存图，也可以再抽一张新感觉。'}}</text>
+    <text class="poster-status">{{exportReadyPath ? '小海报好了' : '存图或再抽一张'}}</text>
 
     <canvas id="posterCanvas" canvas-id="posterCanvas" type="2d" class="poster-canvas"></canvas>
   </view>

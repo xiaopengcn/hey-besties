@@ -4,7 +4,7 @@
   <view class="page-content favorites-content">
     <view wx:if="{{favorites.length === 0}}" class="glass-card empty-state">
       <text class="section-title">衣架还空着</text>
-      <text class="section-subtitle">先去遇见一套心动的，再把它悄悄挂在这里。</text>
+      <text class="section-subtitle">遇见心动的，就把它挂在这里</text>
     </view>
 
     <view wx:for="{{favorites}}" wx:key="id" class="glass-card favorite-card">

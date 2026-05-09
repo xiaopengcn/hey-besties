@@ -4,8 +4,8 @@
   <view wx:if="{{outfit}}" class="page-content result-content">
     <view class="page-lead">
       <text class="result-scene-pill">{{outfit.scene.name}} · {{outfit.scene.mood}}</text>
-      <text class="page-lead-title">今天这套，很适合漂亮营业。</text>
-      <text class="page-lead-copy">主题给氛围，元素给小心机，小人先替衣柜试试看。</text>
+      <text class="page-lead-title">这套，很适合漂亮营业</text>
+      <text class="page-lead-copy">小跳替衣柜试过了</text>
     </view>
 
     <view class="glass-card result-summary">
@@ -27,8 +27,8 @@
 
     <view class="glass-card doll-panel">
       <view class="panel-head">
-        <text class="section-title">小人今日上身</text>
-        <text class="panel-hint">{{outfit.look.route === 'dress' ? '连衣裙氛围在线' : '上下装搭得刚好'}}</text>
+        <text class="section-title">小跳上身</text>
+        <text class="panel-hint">{{outfit.look.route === 'dress' ? '连衣裙' : '上下搭'}}</text>
       </view>
       <view class="doll-tools">
         <view class="tool-orb-wrap">
@@ -51,13 +51,10 @@
         </view>
       </view>
       <paper-doll look="{{outfit.look}}"></paper-doll>
-      <view class="doll-panel-footer">
-        <text class="doll-panel-tip">右上角留了换换、心动和晒晒的小开关。</text>
-      </view>
     </view>
 
     <view class="glass-card breakdown-panel">
-      <text class="section-title">这套的小心思</text>
+      <text class="section-title">小心思</text>
       <view class="breakdown-list">
         <view class="breakdown-item">
           <text class="breakdown-key">今日局</text>
@@ -69,18 +66,18 @@
         </view>
         <view class="breakdown-item">
           <text class="breakdown-key">小细节</text>
-          <text class="breakdown-value">{{outfit.summary}}</text>
+          <text class="breakdown-value">{{outfit.elements[0]}}、{{outfit.elements[1]}}、{{outfit.elements[2]}}</text>
         </view>
         <view wx:if="{{outfit.look.layers.outerwear}}" class="breakdown-item">
-          <text class="breakdown-key">加分层</text>
-          <text class="breakdown-value">{{outfit.look.layers.outerwear.name}}，给整套多一点轻盈层次。</text>
+          <text class="breakdown-key">加分项</text>
+          <text class="breakdown-value">{{outfit.look.layers.outerwear.name}}</text>
         </view>
       </view>
     </view>
 
     <view class="inline-actions result-actions">
-      <button class="primary-button" bindtap="reroll">再抽一套</button>
-      <button class="secondary-button" bindtap="goScenes">换个出门局</button>
+      <button class="primary-button" bindtap="reroll">换一套</button>
+      <button class="secondary-button" bindtap="goScenes">换个局</button>
     </view>
   </view>
 </view>

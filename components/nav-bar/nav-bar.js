@@ -4,10 +4,6 @@ Component({
       type: String,
       value: ''
     },
-    subtitle: {
-      type: String,
-      value: ''
-    },
     showBack: {
       type: Boolean,
       value: false
@@ -20,13 +16,22 @@ Component({
   },
   lifetimes: {
     attached() {
-      const app = getApp();
-      const system = app.globalData.system || {};
-      this.setData({
-        navBarTop: system.navBarTop || 20,
-        capsuleHeight: system.capsuleHeight || 32,
-        capsuleWidth: system.capsuleWidth || 96
-      });
+      const capsule = wx.getMenuButtonBoundingClientRect();
+      if (capsule) {
+        this.setData({
+          navBarTop: capsule.top,
+          capsuleHeight: capsule.height,
+          capsuleWidth: capsule.width
+        });
+      } else {
+        const app = getApp();
+        const system = app.globalData.system || {};
+        this.setData({
+          navBarTop: system.navBarTop || 20,
+          capsuleHeight: system.capsuleHeight || 32,
+          capsuleWidth: system.capsuleWidth || 96
+        });
+      }
     }
   },
   methods: {

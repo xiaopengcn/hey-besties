@@ -60,7 +60,7 @@ function resolveWeatherBias(weatherContext) {
       outerwearChanceOffset: -0.35,
       forceOuterwearOff: true,
       preferredBottomIds: ['shorts-mini', 'skirt-mini', 'skirt-pleated', 'skirt-a-line'],
-      note: '今天偏热，轻薄透气一点，出门更清爽。'
+      note: '偏热，轻薄透气更清爽'
     };
   }
 
@@ -72,8 +72,8 @@ function resolveWeatherBias(weatherContext) {
       forceOuterwearOff: false,
       preferredBottomIds: ['pants-wide', 'pants-tailored', 'skirt-midi'],
       note: weatherContext.isRaining
-        ? '今天偏冷又有雨，利落下装和小外搭会更安心。'
-        : '今天偏凉，针织、长线条和轻叠穿都很乖。'
+        ? '偏冷有雨，利落下装+小外搭'
+        : '偏凉，针织和轻叠穿都很乖'
     };
   }
 
@@ -84,7 +84,7 @@ function resolveWeatherBias(weatherContext) {
       outerwearChanceOffset: 0.22,
       forceOuterwearOff: false,
       preferredBottomIds: ['pants-wide', 'pants-tailored', 'shorts-mini', 'skirt-mini'],
-      note: '今天有雨，利落下装加轻外搭，清爽不狼狈。'
+      note: '有雨，利落下装+轻外搭'
     };
   }
 
@@ -94,7 +94,7 @@ function resolveWeatherBias(weatherContext) {
     outerwearChanceOffset: 0,
     forceOuterwearOff: false,
     preferredBottomIds: null,
-    note: '今天天气温和，按这场局漂亮发挥就很顺。'
+    note: '天气温和，按这场局漂亮发挥'
   };
 }
 
@@ -192,7 +192,7 @@ function generateOutfitForScene(sceneId, seedInput, weatherContext) {
     look,
     weather: weatherContext && weatherContext.status === 'ready' ? weatherContext : null,
     weatherSummary,
-    summary: `${scene.name}的小灵感：${color}、${material}和${accent}一起冒出来。`,
+    summary: `${color}、${material}、${accent}`,
     createdAt
   };
 }

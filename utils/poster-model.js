@@ -1,7 +1,7 @@
 function buildPosterModel(outfit) {
   const copyLines = [
     `今日主打：${outfit.theme.title}`,
-    `小元素：${outfit.elements.join(' / ')}`
+    `${outfit.elements.join(' / ')}`
   ];
 
   if (outfit.weatherSummary) {

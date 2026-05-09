@@ -9,11 +9,24 @@ function readProjectFile(relativePath) {
 
 test('home page uses a horizontal scene carousel and a compact top title', () => {
   const homeWxml = readProjectFile('pages/home/home.wxml');
+  const homeWxss = readProjectFile('pages/home/home.wxss');
 
   assert.match(homeWxml, /<nav-bar[^>]*title="今天是什么局"/);
   assert.doesNotMatch(homeWxml, /<nav-bar[^>]*subtitle=/);
   assert.match(homeWxml, /<scroll-view[^>]*class="scene-carousel"[^>]*scroll-x="true"/);
   assert.match(homeWxml, /weather-status/);
+  assert.match(homeWxml, /class="hero-bubbles"/);
+  assert.match(homeWxml, /hero-bubble--one/);
+  assert.match(homeWxml, /hero-bubble--two/);
+  assert.match(homeWxml, /hero-bubble--three/);
+  assert.doesNotMatch(homeWxml, /hero-bubble--four/);
+  assert.match(homeWxss, /animation-direction:\s*alternate/);
+  assert.match(homeWxss, /@keyframes bubbleOrbitOne/);
+  assert.match(homeWxss, /@keyframes bubbleOrbitTwo/);
+  assert.match(homeWxss, /@keyframes bubbleOrbitThree/);
+  assert.match(homeWxss, /\.hero-bubble::before/);
+  assert.doesNotMatch(homeWxss, /mix-blend-mode:\s*screen/);
+  assert.match(homeWxss, /@keyframes sunDrift/);
 });
 
 test('result and poster pages rely on compact nav titles and floating tool actions', () => {

@@ -34,10 +34,10 @@ Page({
   buildStyleSummary(outfit) {
     const bits = [outfit.theme.title];
     if (outfit.look.layers.outerwear) {
-      bits.push(`加一件${outfit.look.layers.outerwear.name}`);
+      bits.push(`+ ${outfit.look.layers.outerwear.name}`);
     }
-    bits.push(`${outfit.elements[0]}主色`);
-    bits.push(`${outfit.elements[1]}质感`);
+    bits.push(outfit.elements[0]);
+    bits.push(outfit.elements[1]);
     return bits.join(' · ');
   },
   generate(sceneId) {
@@ -53,33 +53,21 @@ Page({
     const next = !favorite;
     if (next) {
       saveFavorite(outfit);
-      wx.showToast({
-        title: '已收藏这套',
-        icon: 'success'
-      });
+      wx.showToast({ title: '收好了', icon: 'success' });
     } else {
       removeFavorite(outfit.id);
-      wx.showToast({
-        title: '已取消收藏',
-        icon: 'none'
-      });
+      wx.showToast({ title: '取下了', icon: 'none' });
     }
-    this.setData({
-      favorite: next
-    });
+    this.setData({ favorite: next });
   },
   goPoster() {
-    wx.navigateTo({
-      url: '/pages/poster/poster'
-    });
+    wx.navigateTo({ url: '/pages/poster/poster' });
   },
   goScenes() {
     wx.navigateBack({
       delta: 1,
       fail: () => {
-        wx.reLaunch({
-          url: '/pages/home/home'
-        });
+        wx.reLaunch({ url: '/pages/home/home' });
       }
     });
   },

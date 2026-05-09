@@ -38,6 +38,86 @@
   background: radial-gradient(ellipse, rgba(255, 143, 171, 0.28) 0%, rgba(255, 143, 171, 0) 72%);
 }
 
+/* Floating decorations */
+.deco {
+  position: absolute;
+  z-index: 0;
+  animation: floatDeco 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.deco-heart-a {
+  left: 24rpx;
+  top: 160rpx;
+  font-size: 32rpx;
+  color: #ff8cab;
+  opacity: 0.7;
+  animation-delay: 0s;
+}
+
+.deco-heart-b {
+  right: 20rpx;
+  top: 280rpx;
+  font-size: 26rpx;
+  color: #ffb8c6;
+  opacity: 0.65;
+  animation-delay: 1.2s;
+}
+
+.deco-star-a {
+  left: 52rpx;
+  top: 310rpx;
+  font-size: 28rpx;
+  color: #ffc77c;
+  opacity: 0.7;
+  animation-delay: 0.6s;
+}
+
+.deco-star-b {
+  right: 44rpx;
+  top: 140rpx;
+  font-size: 24rpx;
+  color: #ffe291;
+  opacity: 0.72;
+  animation-delay: 1.8s;
+}
+
+.deco-star-c {
+  left: 38rpx;
+  top: 420rpx;
+  font-size: 22rpx;
+  color: #ffc77c;
+  opacity: 0.6;
+  animation-delay: 2.4s;
+}
+
+.deco-sparkle-a {
+  right: 32rpx;
+  top: 400rpx;
+  font-size: 24rpx;
+  color: #c3a6ff;
+  opacity: 0.55;
+  animation-delay: 0.8s;
+}
+
+.deco-sparkle-b {
+  left: 64rpx;
+  top: 240rpx;
+  font-size: 20rpx;
+  color: #8fcfff;
+  opacity: 0.6;
+  animation-delay: 2.0s;
+}
+
+@keyframes floatDeco {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-14rpx) scale(1.08);
+  }
+}
+
 .paper-doll {
   position: relative;
   width: 360rpx;
@@ -150,6 +230,7 @@
   z-index: 1;
 }
 
+/* Arms spread wider */
 .body-arm {
   width: 34rpx;
   height: 190rpx;
@@ -160,13 +241,13 @@
 }
 
 .arm-left {
-  left: 96rpx;
-  transform: rotate(7deg);
+  left: 88rpx;
+  transform: rotate(16deg);
 }
 
 .arm-right {
-  left: 232rpx;
-  transform: rotate(-7deg);
+  left: 238rpx;
+  transform: rotate(-16deg);
 }
 
 .body-leg {
@@ -308,6 +389,55 @@
   z-index: 8;
 }
 
+.accessory--spread {
+  /* Slightly offset accessories outward */
+}
+
+/* Bags spread further out */
+.accessory--spread.mini-bag {
+  width: 58rpx;
+  height: 58rpx;
+  right: 46rpx;
+  top: 320rpx;
+  border-radius: 20rpx;
+  background: #ffeab5;
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.accessory--spread.mini-bag::before {
+  content: '';
+  position: absolute;
+  left: 10rpx;
+  top: -18rpx;
+  width: 38rpx;
+  height: 24rpx;
+  border: 4rpx solid #c68f33;
+  border-bottom: 0;
+  border-radius: 20rpx 20rpx 0 0;
+}
+
+.accessory--spread.underarm-bag {
+  width: 76rpx;
+  height: 40rpx;
+  right: 40rpx;
+  top: 330rpx;
+  border-radius: 24rpx 24rpx 18rpx 18rpx;
+  background: #ffeab5;
+}
+
+.accessory--spread.underarm-bag::before {
+  content: '';
+  position: absolute;
+  left: 14rpx;
+  top: -12rpx;
+  width: 46rpx;
+  height: 20rpx;
+  border: 4rpx solid #c68f33;
+  border-bottom: 0;
+  border-radius: 20rpx 20rpx 0 0;
+}
+
+/* Keep original accessory styles for non-spread fallback */
 .mini-bag {
   width: 58rpx;
   height: 58rpx;
@@ -502,6 +632,13 @@
   top: 108rpx;
   width: 14rpx;
   height: 14rpx;
+}
+
+.spark-e {
+  left: 110rpx;
+  top: 480rpx;
+  width: 12rpx;
+  height: 12rpx;
 }
 
 .cream { background: #fff4dd; }

@@ -8,8 +8,8 @@ Page({
     currentScene: scenes[0],
     selectedIndexLabel: `01 / ${String(scenes.length).padStart(2, '0')}`,
     weatherContext: createWeatherContext(),
-    weatherTitle: '天气小纸条待签收',
-    weatherDetail: '先按今天的局出发，也会很好看。'
+    weatherTitle: '天气小纸条',
+    weatherDetail: '等小纸条签收'
   },
   onLoad() {
     const app = getApp();
@@ -58,31 +58,17 @@ Page({
     });
   },
   getWeatherTitle(weatherContext) {
-    if (!weatherContext) {
-      return '天气小纸条待签收';
-    }
-    if (weatherContext.status === 'loading') {
-      return '正在偷看窗外的天';
-    }
-    if (weatherContext.status === 'ready') {
-      return `${weatherContext.cityName}${weatherContext.districtName ? `·${weatherContext.districtName}` : ''}`;
-    }
-    return '先按今天的局来搭';
+    if (!weatherContext) return '天气小纸条';
+    if (weatherContext.status === 'loading') return '偷看窗外...';
+    if (weatherContext.status === 'ready') return `${weatherContext.cityName}${weatherContext.districtName ? '·' + weatherContext.districtName : ''}`;
+    return '今天怎么穿';
   },
   getWeatherDetail(weatherContext) {
-    if (!weatherContext) {
-      return '先按今天的局出发，也会很好看。';
-    }
-    if (weatherContext.status === 'loading') {
-      return '等小纸条回来，冷暖也一起放进衣柜灵感里。';
-    }
-    if (weatherContext.status === 'ready') {
-      return `${weatherContext.temperature}°C · ${weatherContext.conditionText}`;
-    }
-    if (weatherContext.status === 'denied') {
-      return '定位先害羞躲起来，今天就按场景开搭。';
-    }
-    return '天气小纸条走丢啦，今天先按场景开搭。';
+    if (!weatherContext) return '等小纸条签收';
+    if (weatherContext.status === 'loading') return '冷暖一起放进来';
+    if (weatherContext.status === 'ready') return `${weatherContext.temperature}°C ${weatherContext.conditionText}`;
+    if (weatherContext.status === 'denied') return '定位害羞了，先看场景搭';
+    return '小纸条走丢了，先看场景搭';
   },
   goGenerate() {
     wx.navigateTo({

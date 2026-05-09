@@ -1,0 +1,52 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project
+
+A WeChat Mini Program (微信小程序) that generates outfit inspiration for young women. Users pick a scene (date, besties outing, exhibition, cafe), and the app produces a themed outfit with a paper-doll visualization. Native WXML/WXSS/JS — no third-party framework.
+
+## Commands
+
+```bash
+npm test              # Run all tests (Node.js test runner)
+npm test -- --test-name-pattern="date"  # Run tests matching a pattern
+```
+
+Tests run under Node.js via `node --test`. They exercise the generator and poster model logic directly — no WeChat runtime needed. WeChat-specific modules (`wx.*`) are guarded with `typeof wx === 'undefined'` checks throughout, which is what makes unit testing possible outside the mini-program runtime.
+
+## Architecture
+
+**Page flow**: `pages/home` → `pages/result` → `pages/poster`, with `pages/favorites` as a side entry.
+
+- **home** — Scene selection cards + weather context fetch. User picks a scene, taps generate.
+- **result** — Displays the generated outfit (theme, 3 element tags, paper-doll layers). Supports reroll, favorite toggle, and navigate to poster.
+- **poster** — Canvas-based shareable poster rendering. Renders the paper-doll + text onto a 750×1334 canvas, exports to temp file, saves to photo album.
+- **favorites** — Local-storage-backed list of saved outfits, with tap-to-view and swipe-to-remove.
+
+**Core generation pipeline** (`utils/generator.js`):
+1. Pick a scene → select theme, color, material, accent from scene pools (deterministic via seed)
+2. Resolve weather bias — hot/cold/rain adjust material pools, route preference, outerwear chance, and bottom preferences
+3. Build look: choose route (dress vs separates), assemble garment layers, optionally add outerwear
+4. Return a full outfit object with palette, texture metadata, and weather summary
+
+**Data model** (`data/`):
+- `scenes.js` — 4 scenes, each with theme/color/material/accent pools, silhouettes, preferred routes
+- `wardrobe.js` — Garment catalog (tops, bottoms, dresses, outerwear, accessories) + color palettes + material→CSS class/texture mappings
+
+**Key utils**:
+- `utils/weather.js` — Weather context lifecycle: cache (30min TTL), fetch via cloud function, permission handling. Called from home page, consumed by generator.
+- `utils/storage.js` — Favorite outfits persisted via `wx.setStorageSync`, capped at 30 items.
+- `utils/system.js` — Computes nav bar / status bar / capsule metrics from `wx.getWindowInfo()` + `wx.getMenuButtonBoundingClientRect()`.
+- `utils/poster-model.js` — Builds the data model for poster rendering (layout, decorations, copy lines).
+- `utils/poster-renderer.js` — Canvas 2D rendering pipeline: gradient background, decorations, rounded-rect cards, paper-doll shapes, text layout.
+
+**Cloud function**: `cloudfunctions/getWeather` — Calls QWeather API (geo lookup + current weather) via Node.js `https`. Requires `QWEATHER_API_KEY` and `QWEATHER_API_HOST` env vars. Returns city/district name, temperature, feels-like, condition text/code.
+
+**Components**:
+- `components/nav-bar` — Custom navigation bar (since `navigationStyle: "custom"` is set).
+- `components/paper-doll` — The paper-doll visualization that renders outfit layers.
+
+**CSS design system** (`app.wxss`): CSS custom properties define the full design token set — colors (primary coral/pink, secondary warm tones, mint/sky/lilac accents), gradients, shadows, radii, spacing scale. Utility classes for glass cards, hero cards, pill chips, buttons, tags, and orb tools.
+
+**Key constraint**: Code runs both in WeChat runtime and Node.js for tests. Always guard `wx.*` calls with `typeof wx === 'undefined'` checks. The generator is pure JS with no runtime dependencies — `Math.random()` is the only side effect.
