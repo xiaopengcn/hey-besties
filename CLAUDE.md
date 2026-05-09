@@ -50,3 +50,36 @@ Tests run under Node.js via `node --test`. They exercise the generator and poste
 **CSS design system** (`app.wxss`): CSS custom properties define the full design token set — colors (primary coral/pink, secondary warm tones, mint/sky/lilac accents), gradients, shadows, radii, spacing scale. Utility classes for glass cards, hero cards, pill chips, buttons, tags, and orb tools.
 
 **Key constraint**: Code runs both in WeChat runtime and Node.js for tests. Always guard `wx.*` calls with `typeof wx === 'undefined'` checks. The generator is pure JS with no runtime dependencies — `Math.random()` is the only side effect.
+
+## Voice & Tone
+
+All user-facing copy must follow a consistent editorial voice:
+
+- **小清新 / 甜而不腻** — Light, fresh, sweet but never cloying. Think "桃子汽水" not "糖浆".
+- **暖** — Warm and intimate, like a close friend texting you. Use gentle, affectionate phrasing.
+- **短** — Every sentence earns its place. If it can be said in 4 characters, don't use 12. Remove filler like "可以", "一下", "啦" unless they carry emotional weight.
+- **有画面感** — Prefer concrete, sensory words (奶油、薄荷、软糯、轻快) over abstract ones (优质、完美、极佳).
+- **不端不装** — Never formal, never stiff. No "请", no marketing-speak, no "您的".
+
+### Copy patterns to follow
+
+| Category | Do | Don't |
+|---|---|---|
+| Buttons | `抽一套` `心动衣架` `换一套` | `生成今日穿搭推荐` `查看我的收藏` |
+| Page titles | `今天是什么局` `心动衣架` | `场景选择` `收藏列表` |
+| Lead copy | `挑一个局，颜色和小心机自己冒出来` | `请选择您喜欢的出行场景` |
+| Empty states | `衣架还空着` `遇见心动的，就把它挂在这里` | `暂无收藏数据` |
+| Weather | `偷看窗外...` `定位害羞了` `小纸条走丢了` | `天气数据获取中` `定位权限被拒绝` `获取失败` |
+| Toast | `收好了` `取下了` `生成好啦` | `已收藏` `已取消收藏` `生成成功` |
+| Scene intros | `逛街、打卡、拍照都刚好，给镜头一点元气` | `适合逛街、打卡、拍照等多种场景` |
+| Error/hint | `再试一次` | `操作失败，请重试` |
+
+### How to apply
+
+When writing any user-facing string — page copy, button labels, toast messages, weather notes, scene descriptions, share text — ask:
+
+1. Does it sound like a bestie talking? If not, soften it.
+2. Can it be shorter without losing warmth? If so, cut.
+3. Would a 22-year-old girl smile reading it? If not, rewrite.
+
+The test `visible product copy keeps a fresh editorial tone` in `tests/layout-structure.test.js` enforces part of this — it rejects harsh negative language (失败, 删除, 获取失败) in visible copy.

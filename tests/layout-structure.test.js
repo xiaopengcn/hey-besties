@@ -33,7 +33,8 @@ test('result and poster pages rely on compact nav titles and floating tool actio
   const resultWxml = readProjectFile('pages/result/result.wxml');
   const posterWxml = readProjectFile('pages/poster/poster.wxml');
 
-  assert.match(resultWxml, /<nav-bar[^>]*title="今日出门灵感"/);
+  assert.match(resultWxml, /今日出门灵感/);
+  assert.match(resultWxml, /闺蜜舞台/);
   assert.doesNotMatch(resultWxml, /<nav-bar[^>]*subtitle=/);
   assert.match(resultWxml, /class="doll-tools"/);
   assert.match(resultWxml, /class="tool-orb/);
@@ -53,6 +54,7 @@ test('visible product copy keeps a fresh editorial tone', () => {
     'pages/result/result.wxml',
     'pages/poster/poster.wxml',
     'pages/favorites/favorites.wxml',
+    'components/bestie-stage/bestie-stage.wxml',
     'pages/home/home.js',
     'pages/poster/poster.js',
     'utils/generator.js',
@@ -66,4 +68,16 @@ test('visible product copy keeps a fresh editorial tone', () => {
   assert.match(visibleCopy, /衣柜|上镜|出门|小灵感|漂亮营业/);
   assert.doesNotMatch(visibleCopy, /纸片人上身预览|分享图预览|生成今天的穿搭灵感|看看我喜欢的结果/);
   assert.doesNotMatch(visibleCopy, /海报生成失败|保存失败|天气获取失败|删除/);
+});
+
+test('bestie stage marks me explicitly and uses a left-side hand orb for borrow actions', () => {
+  const stageWxml = readProjectFile('components/bestie-stage/bestie-stage.wxml');
+  const stageWxss = readProjectFile('components/bestie-stage/bestie-stage.wxss');
+
+  assert.match(stageWxml, /class="doll-me-tag"/);
+  assert.match(stageWxml, /class="copy-orb-wrap"/);
+  assert.match(stageWxml, /class="copy-orb[^"]*"/);
+  assert.match(stageWxml, /icon-hand\.svg/);
+  assert.doesNotMatch(stageWxml, /借我穿/);
+  assert.match(stageWxss, /left:\s*36rpx/);
 });

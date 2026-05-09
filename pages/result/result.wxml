@@ -1,7 +1,8 @@
 <view class="page-shell">
-  <nav-bar showBack="{{true}}" title="今日出门灵感"></nav-bar>
+  <nav-bar showBack="{{true}}" title="{{isStageMode ? '闺蜜舞台' : '今日出门灵感'}}"></nav-bar>
 
-  <view wx:if="{{outfit}}" class="page-content result-content">
+  <!-- ── Solo mode ── -->
+  <view wx:if="{{!isStageMode && outfit}}" class="page-content result-content">
     <view class="page-lead">
       <text class="result-scene-pill">{{outfit.scene.name}} · {{outfit.scene.mood}}</text>
       <text class="page-lead-title">这套，很适合漂亮营业</text>
@@ -32,21 +33,24 @@
       </view>
       <view class="doll-tools">
         <view class="tool-orb-wrap">
-          <text class="tool-orb__hint">换换</text>
           <view class="tool-orb tool-orb--warm" bindtap="reroll">
             <image class="tool-orb__icon-image" src="/assets/icons/icon-refresh.svg" mode="aspectFit"></image>
           </view>
         </view>
         <view class="tool-orb-wrap">
-          <text class="tool-orb__hint">{{favorite ? '心动中' : '心动'}}</text>
           <view class="tool-orb {{favorite ? 'tool-orb--active' : ''}}" bindtap="toggleFavorite">
             <image class="tool-orb__icon-image" src="{{favorite ? '/assets/icons/icon-heart-solid.svg' : '/assets/icons/icon-heart-outline.svg'}}" mode="aspectFit"></image>
           </view>
         </view>
         <view class="tool-orb-wrap">
-          <text class="tool-orb__hint">晒晒</text>
           <view class="tool-orb" bindtap="goPoster">
             <image class="tool-orb__icon-image" src="/assets/icons/icon-share.svg" mode="aspectFit"></image>
+          </view>
+        </view>
+        <view class="tool-orb-wrap">
+          <text class="tool-orb__hint">闺蜜舞台</text>
+          <view class="tool-orb tool-orb--warm" bindtap="goBestieStage">
+            <image class="tool-orb__icon-image" src="/assets/icons/icon-besties.svg" mode="aspectFit"></image>
           </view>
         </view>
       </view>
@@ -77,6 +81,31 @@
 
     <view class="inline-actions result-actions">
       <button class="primary-button" bindtap="reroll">换一套</button>
+      <button class="secondary-button" bindtap="goScenes">换个局</button>
+    </view>
+  </view>
+
+  <!-- ── Stage mode ── -->
+  <view wx:if="{{isStageMode && outfit}}" class="page-content result-content">
+    <view class="page-lead">
+      <text class="result-scene-pill">{{outfit.scene.name}} · 闺蜜舞台</text>
+      <text class="page-lead-title">一起搭，更好玩</text>
+      <text class="page-lead-copy">滑动看看闺蜜们的穿搭，喜欢就借来穿</text>
+    </view>
+
+    <bestie-stage
+      participants="{{stageParticipants}}"
+      activeIndex="{{stageActiveIndex}}"
+      myUserId="{{myUserId}}"
+      isDevMode="{{isDevMode}}"
+      bindswipe="onStageSwipe"
+      bindcopy="onStageCopy"
+      bindreroll="onStageReroll"
+      bindaddmock="onStageAddMock"
+    ></bestie-stage>
+
+    <view class="inline-actions result-actions">
+      <button class="primary-button" bindtap="onStageReroll">换一套</button>
       <button class="secondary-button" bindtap="goScenes">换个局</button>
     </view>
   </view>

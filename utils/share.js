@@ -5,6 +5,14 @@ function createShareMessage(outfit) {
   };
 }
 
+function createStageShareMessage(stageId, sceneId) {
+  return {
+    title: '来闺蜜舞台，一起挑今天的衣服',
+    path: `/pages/stage/stage?stageId=${stageId}&scene=${sceneId}`
+  };
+}
+
 module.exports = {
-  createShareMessage
+  createShareMessage,
+  createStageShareMessage
 };

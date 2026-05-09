@@ -1,0 +1,62 @@
+<view class="bestie-stage">
+  <view class="stage-info-bar">
+    <text class="pill-chip stage-count-chip">{{participants.length}}/3 闺蜜在线</text>
+    <button class="share-chiclet" open-type="share">
+      <image class="share-chiclet-icon" src="/assets/icons/icon-share.svg" mode="aspectFit"></image>
+      <text class="share-chiclet-text">邀请闺蜜</text>
+    </button>
+  </view>
+
+  <swiper
+    class="doll-swiper"
+    current="{{currentIndex}}"
+    bindchange="onSwiperChange"
+    duration="300"
+    easing-function="easeOutCubic"
+    indicator-dots="{{false}}"
+  >
+    <swiper-item wx:for="{{participants}}" wx:key="userId" class="doll-swiper-item">
+      <view class="doll-card glass-card">
+        <view class="doll-identity-row">
+          <text class="doll-name-pill">{{item.nickName}}</text>
+          <text wx:if="{{item.userId === myUserId}}" class="doll-me-tag">我</text>
+        </view>
+        <view class="doll-stage-wrap">
+          <view
+            wx:if="{{item.userId !== myUserId}}"
+            class="copy-orb-wrap"
+            data-index="{{index}}"
+            bindtap="onCopyTap"
+          >
+            <text class="copy-orb__hint">借穿</text>
+            <view class="copy-orb copy-orb--warm">
+              <image class="copy-orb__icon-image" src="/assets/icons/icon-hand.svg" mode="aspectFit"></image>
+            </view>
+          </view>
+          <paper-doll look="{{item.outfit.look}}"></paper-doll>
+        </view>
+      </view>
+    </swiper-item>
+
+    <swiper-item wx:if="{{participants.length < 3}}" class="doll-swiper-item">
+      <view class="doll-card glass-card doll-card--empty">
+        <text class="empty-icon">✧</text>
+        <text class="empty-title">等闺蜜来</text>
+        <text class="empty-hint">分享邀请卡，闺蜜点开就能入场</text>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <view class="active-outfit-card glass-card">
+    <text class="section-title">{{participants[currentIndex].outfit.theme.title}}</text>
+    <view class="tag-row stage-tags">
+      <text class="tag tag--sweet">{{participants[currentIndex].outfit.elements[0]}}</text>
+      <text class="tag tag--warm">{{participants[currentIndex].outfit.elements[1]}}</text>
+      <text class="tag tag--cool">{{participants[currentIndex].outfit.elements[2]}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{isDevMode && participants.length < 3}}" class="dev-actions">
+    <button class="secondary-button" bindtap="onAddMockTap">加个闺蜜</button>
+  </view>
+</view>

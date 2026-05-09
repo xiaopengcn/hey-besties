@@ -1,0 +1,212 @@
+.bestie-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 22rpx;
+}
+
+.stage-info-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.stage-count-chip {
+  flex-shrink: 0;
+}
+
+.share-chiclet {
+  display: inline-flex;
+  align-items: center;
+  gap: 10rpx;
+  padding: 18rpx 24rpx;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: 700;
+  border: 0;
+  box-shadow: 0 10rpx 22rpx rgba(255, 111, 145, 0.18);
+  line-height: 1;
+}
+
+.share-chiclet-icon {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.share-chiclet-text {
+  color: #fff;
+}
+
+.doll-swiper {
+  width: 100%;
+  height: 860rpx;
+}
+
+.doll-swiper-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10rpx;
+}
+
+.doll-card {
+  width: 100%;
+  padding: 24rpx 28rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.doll-stage-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 660rpx;
+}
+
+.doll-card--empty {
+  min-height: 640rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+}
+
+.empty-icon {
+  font-size: 64rpx;
+  color: var(--color-primary);
+  opacity: 0.4;
+}
+
+.empty-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: var(--color-ink-soft);
+}
+
+.empty-hint {
+  font-size: 24rpx;
+  color: var(--color-ink-faint);
+  max-width: 360rpx;
+  text-align: center;
+}
+
+.doll-identity-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+  align-self: flex-start;
+}
+
+.doll-name-pill {
+  padding: 10rpx 20rpx;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 184, 108, 0.22);
+  color: #935117;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.doll-me-tag {
+  padding: 6rpx 16rpx;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 111, 145, 0.16);
+  color: var(--color-primary-deep);
+  font-size: 20rpx;
+  font-weight: 700;
+}
+
+.copy-orb-wrap {
+  position: absolute;
+  left: 36rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-orb {
+  position: relative;
+  width: 72rpx;
+  min-width: 72rpx;
+  max-width: 72rpx;
+  height: 72rpx;
+  min-height: 72rpx;
+  max-height: 72rpx;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(255,246,242,0.98) 100%);
+  box-shadow:
+    0 10rpx 26rpx rgba(255, 111, 145, 0.12),
+    inset 0 2rpx 0 rgba(255,255,255,0.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-orb::before {
+  content: '';
+  position: absolute;
+  inset: 1rpx;
+  border-radius: 50%;
+  border: 2rpx solid rgba(255, 255, 255, 0.88);
+}
+
+.copy-orb--warm {
+  background: linear-gradient(180deg, rgba(255,250,243,0.98) 0%, rgba(255,237,225,0.98) 100%);
+}
+
+.copy-orb__icon-image {
+  position: relative;
+  z-index: 1;
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.copy-orb__hint {
+  position: absolute;
+  left: 86rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 8rpx 14rpx;
+  border-radius: 999rpx;
+  background: rgba(255,255,255,0.92);
+  color: var(--color-ink-soft);
+  font-size: 20rpx;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 8rpx 18rpx rgba(255, 111, 145, 0.08);
+}
+
+.active-outfit-card {
+  padding: 28rpx;
+}
+
+.stage-tags {
+  margin-top: 18rpx;
+}
+
+.dev-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 8rpx;
+}
+
+.dev-actions .secondary-button {
+  flex: none;
+  width: auto;
+  padding: 0 40rpx;
+  min-height: 80rpx;
+  font-size: 26rpx;
+  border: 2rpx dashed rgba(255, 184, 108, 0.4);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--color-ink-soft);
+}
