@@ -1,0 +1,110 @@
+.poster-content {
+  padding-top: 10rpx;
+}
+
+.poster-card {
+  position: relative;
+  padding: 36rpx 28rpx 40rpx;
+  border-radius: 40rpx;
+  overflow: hidden;
+}
+
+.poster-tools {
+  position: absolute;
+  top: 28rpx;
+  right: 24rpx;
+  z-index: 12;
+  display: flex;
+  gap: 12rpx;
+}
+
+.poster-scene {
+  display: inline-block;
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(255,255,255,0.18);
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.poster-theme {
+  display: block;
+  margin-top: 20rpx;
+  font-size: 52rpx;
+  line-height: 1.14;
+  font-weight: 800;
+}
+
+.poster-vibe {
+  display: block;
+  margin-top: 10rpx;
+  color: rgba(255,255,255,0.84);
+}
+
+.poster-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+  margin-top: 24rpx;
+}
+
+.poster-corner {
+  position: absolute;
+  width: 132rpx;
+  height: 132rpx;
+}
+
+.poster-corner--left {
+  top: -34rpx;
+  left: -34rpx;
+}
+
+.poster-corner--right {
+  top: 92rpx;
+  right: -28rpx;
+}
+
+.poster-tag {
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(255,255,255,0.18);
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.poster-footer {
+  display: block;
+  margin-top: 12rpx;
+  text-align: center;
+  color: rgba(255,255,255,0.82);
+  font-size: 24rpx;
+}
+
+.poster-copy {
+  margin-top: 6rpx;
+}
+
+.poster-copy-line {
+  display: block;
+  margin-top: 10rpx;
+  color: rgba(255,255,255,0.9);
+  font-size: 24rpx;
+}
+
+.poster-status {
+  display: block;
+  margin-top: 20rpx;
+  text-align: center;
+  color: var(--color-ink-soft);
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.poster-canvas {
+  position: fixed;
+  left: -9999px;
+  top: -9999px;
+  width: 750rpx;
+  height: 1334rpx;
+  pointer-events: none;
+}

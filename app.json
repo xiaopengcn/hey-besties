@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/result/result",
+    "pages/favorites/favorites",
+    "pages/poster/poster"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundColor": "#fff7f4",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

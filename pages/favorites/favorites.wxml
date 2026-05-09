@@ -1,0 +1,23 @@
+<view class="page-shell">
+  <nav-bar showBack="{{true}}" title="我喜欢的结果"></nav-bar>
+
+  <view class="page-content favorites-content">
+    <view wx:if="{{favorites.length === 0}}" class="glass-card empty-state">
+      <text class="section-title">还没有收藏</text>
+      <text class="section-subtitle">先去抽一套顺眼的，再回来把它存下来。</text>
+    </view>
+
+    <view wx:for="{{favorites}}" wx:key="id" class="glass-card favorite-card">
+      <view bindtap="openFavorite" data-id="{{item.id}}">
+        <text class="favorite-scene">{{item.scene.name}}</text>
+        <text class="favorite-theme">{{item.theme.title}}</text>
+        <view class="tag-row favorite-tags">
+          <text class="tag tag--sweet">{{item.elements[0]}}</text>
+          <text class="tag tag--warm">{{item.elements[1]}}</text>
+          <text class="tag tag--cool">{{item.elements[2]}}</text>
+        </view>
+      </view>
+      <button class="secondary-button favorite-remove" data-id="{{item.id}}" bindtap="removeFavorite">删除</button>
+    </view>
+  </view>
+</view>

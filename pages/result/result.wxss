@@ -1,0 +1,131 @@
+.result-content {
+  padding-top: 10rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 22rpx;
+}
+
+.result-scene-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 58rpx;
+  padding: 0 22rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 111, 145, 0.14);
+  color: #b33d61;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.result-summary,
+.doll-panel,
+.breakdown-panel {
+  padding: 30rpx 28rpx;
+}
+
+.result-label {
+  display: inline-block;
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 184, 108, 0.2);
+  color: #935117;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.result-theme {
+  display: block;
+  margin-top: 18rpx;
+  font-size: 48rpx;
+  line-height: 1.18;
+  font-weight: 800;
+}
+
+.result-vibe {
+  display: block;
+  margin-top: 10rpx;
+  color: var(--color-ink-soft);
+  font-size: 26rpx;
+}
+
+.result-tags {
+  margin-top: 24rpx;
+}
+
+.result-style-summary {
+  display: block;
+  margin-top: 18rpx;
+  color: #a04d68;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.panel-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18rpx;
+}
+
+.panel-hint {
+  font-size: 22rpx;
+  color: var(--color-ink-faint);
+}
+
+.doll-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.doll-tools {
+  position: absolute;
+  top: 90rpx;
+  right: 24rpx;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.doll-panel-footer {
+  margin-top: -8rpx;
+  padding: 0 12rpx 12rpx;
+}
+
+.doll-panel-tip {
+  display: block;
+  text-align: center;
+  color: var(--color-ink-faint);
+  font-size: 22rpx;
+}
+
+.breakdown-list {
+  margin-top: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.breakdown-item {
+  padding: 24rpx;
+  border-radius: 24rpx;
+  background: rgba(255,255,255,0.72);
+}
+
+.breakdown-key {
+  display: block;
+  font-size: 22rpx;
+  color: var(--color-ink-faint);
+}
+
+.breakdown-value {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 26rpx;
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.result-actions {
+  margin-top: 2rpx;
+}

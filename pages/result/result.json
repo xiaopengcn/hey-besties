@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/nav-bar",
+    "paper-doll": "/components/paper-doll/paper-doll"
+  }
+}

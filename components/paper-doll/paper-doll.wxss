@@ -1,0 +1,673 @@
+.paper-stage {
+  position: relative;
+  width: 100%;
+  height: 760rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paper-aura {
+  position: absolute;
+  top: 86rpx;
+  width: 396rpx;
+  height: 508rpx;
+  border-radius: 44% 44% 36% 36%;
+  background: radial-gradient(circle at 50% 30%, rgba(255, 212, 108, 0.24) 0%, rgba(255, 139, 172, 0.16) 42%, rgba(255, 255, 255, 0) 76%);
+  filter: blur(16rpx);
+}
+
+.paper-stand {
+  position: absolute;
+  bottom: 54rpx;
+  width: 372rpx;
+  height: 126rpx;
+  border-radius: 38rpx;
+  background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255, 241, 234, 0.92) 100%);
+  box-shadow:
+    inset 0 2rpx 0 rgba(255,255,255,0.88),
+    0 16rpx 42rpx rgba(255, 111, 145, 0.14);
+}
+
+.paper-shadow {
+  position: absolute;
+  bottom: 78rpx;
+  width: 320rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 143, 171, 0.28) 0%, rgba(255, 143, 171, 0) 72%);
+}
+
+.paper-doll {
+  position: relative;
+  width: 360rpx;
+  height: 640rpx;
+  animation: floaty 4.6s ease-in-out infinite;
+}
+
+.hair-back,
+.body-head,
+.face,
+.hair,
+.fringe,
+.body-neck,
+.body-torso,
+.body-arm,
+.body-leg,
+.body-shoe,
+.garment,
+.accessory {
+  position: absolute;
+}
+
+.hair-back {
+  width: 170rpx;
+  height: 188rpx;
+  left: 95rpx;
+  top: 30rpx;
+  border-radius: 58% 58% 50% 52%;
+  background: #34262e;
+  z-index: 2;
+}
+
+.body-head {
+  width: 118rpx;
+  height: 136rpx;
+  left: 121rpx;
+  top: 46rpx;
+  border-radius: 56% 56% 48% 48%;
+  background: #ffd7c5;
+  z-index: 3;
+}
+
+.hair {
+  width: 150rpx;
+  height: 160rpx;
+  left: 105rpx;
+  top: 24rpx;
+  border-radius: 58% 58% 48% 50%;
+  background: linear-gradient(180deg, #4a3741 0%, #31242b 100%);
+  z-index: 4;
+}
+
+.hair::after {
+  content: '';
+  position: absolute;
+  left: 18rpx;
+  top: 82rpx;
+  width: 116rpx;
+  height: 90rpx;
+  border-radius: 40rpx 40rpx 48rpx 48rpx;
+  background: #40303a;
+}
+
+.fringe {
+  width: 104rpx;
+  height: 42rpx;
+  left: 129rpx;
+  top: 60rpx;
+  border-radius: 0 0 28rpx 28rpx;
+  background:
+    radial-gradient(circle at 18rpx 8rpx, #3b2d35 0 12rpx, transparent 13rpx),
+    radial-gradient(circle at 50rpx 6rpx, #3b2d35 0 12rpx, transparent 13rpx),
+    radial-gradient(circle at 82rpx 8rpx, #3b2d35 0 12rpx, transparent 13rpx);
+  z-index: 5;
+}
+
+.face {
+  width: 92rpx;
+  height: 98rpx;
+  left: 134rpx;
+  top: 74rpx;
+  border-radius: 48rpx;
+  background:
+    radial-gradient(circle at 20rpx 52rpx, rgba(255, 153, 166, 0.42) 0 10rpx, transparent 11rpx),
+    radial-gradient(circle at 72rpx 52rpx, rgba(255, 153, 166, 0.42) 0 10rpx, transparent 11rpx),
+    radial-gradient(circle at 28rpx 40rpx, #3f3137 0 4rpx, transparent 5rpx),
+    radial-gradient(circle at 64rpx 40rpx, #3f3137 0 4rpx, transparent 5rpx),
+    radial-gradient(circle at 46rpx 66rpx, #ff9f9d 0 6rpx, transparent 7rpx),
+    linear-gradient(180deg, transparent 0 62rpx, #ffb4b4 62rpx 66rpx, transparent 66rpx);
+  z-index: 5;
+}
+
+.body-neck {
+  width: 26rpx;
+  height: 30rpx;
+  left: 167rpx;
+  top: 170rpx;
+  background: #ffd7c5;
+  border-radius: 0 0 12rpx 12rpx;
+  z-index: 2;
+}
+
+.body-torso {
+  width: 124rpx;
+  height: 174rpx;
+  left: 118rpx;
+  top: 196rpx;
+  border-radius: 52rpx 52rpx 34rpx 34rpx;
+  background: #ffe7dd;
+  z-index: 1;
+}
+
+.body-arm {
+  width: 34rpx;
+  height: 190rpx;
+  top: 224rpx;
+  border-radius: 18rpx;
+  background: #ffd7c5;
+  z-index: 1;
+}
+
+.arm-left {
+  left: 96rpx;
+  transform: rotate(7deg);
+}
+
+.arm-right {
+  left: 232rpx;
+  transform: rotate(-7deg);
+}
+
+.body-leg {
+  width: 42rpx;
+  height: 216rpx;
+  top: 352rpx;
+  border-radius: 26rpx;
+  background: #ffd7c5;
+  z-index: 0;
+}
+
+.leg-left {
+  left: 138rpx;
+}
+
+.leg-right {
+  left: 186rpx;
+}
+
+.body-shoe {
+  width: 56rpx;
+  height: 24rpx;
+  top: 560rpx;
+  border-radius: 18rpx 18rpx 12rpx 12rpx;
+  background: #fff7f0;
+  box-shadow: inset 0 -6rpx 0 rgba(0, 0, 0, 0.08);
+  z-index: 1;
+}
+
+.shoe-left {
+  left: 130rpx;
+}
+
+.shoe-right {
+  left: 182rpx;
+}
+
+.garment {
+  z-index: 6;
+  box-shadow: inset 0 0 0 4rpx rgba(255,255,255,0.24);
+  overflow: hidden;
+}
+
+.top {
+  left: 112rpx;
+  top: 184rpx;
+  width: 136rpx;
+  height: 146rpx;
+  border-radius: 46rpx 46rpx 34rpx 34rpx;
+}
+
+.shirt {
+  border-radius: 40rpx 40rpx 28rpx 28rpx;
+}
+
+.shirt::before,
+.knit::before,
+.tee::before {
+  content: '';
+  position: absolute;
+  left: 38rpx;
+  top: -2rpx;
+  width: 60rpx;
+  height: 34rpx;
+  border-radius: 0 0 22rpx 22rpx;
+  background: rgba(255,255,255,0.46);
+}
+
+.bottom {
+  left: 110rpx;
+  top: 318rpx;
+  width: 140rpx;
+}
+
+.wide-pants {
+  height: 248rpx;
+  border-radius: 24rpx 24rpx 28rpx 28rpx;
+}
+
+.wide-pants::after {
+  content: '';
+  position: absolute;
+  left: 66rpx;
+  top: 0;
+  width: 8rpx;
+  height: 248rpx;
+  background: rgba(255,255,255,0.2);
+}
+
+.shorts {
+  height: 94rpx;
+  border-radius: 18rpx 18rpx 20rpx 20rpx;
+}
+
+.midi-skirt {
+  height: 234rpx;
+  border-radius: 20rpx 20rpx 60rpx 60rpx;
+}
+
+.mini-skirt {
+  height: 118rpx;
+  border-radius: 20rpx 20rpx 32rpx 32rpx;
+}
+
+.dress {
+  left: 102rpx;
+  top: 184rpx;
+  width: 156rpx;
+}
+
+.outerwear {
+  left: 96rpx;
+  top: 196rpx;
+  width: 168rpx;
+  height: 176rpx;
+  z-index: 7;
+  background: rgba(255,255,255,0.2);
+}
+
+.outer-cardigan {
+  border-radius: 46rpx 46rpx 28rpx 28rpx;
+}
+
+.outer-denim {
+  border-radius: 34rpx;
+}
+
+.mini-dress {
+  height: 252rpx;
+  border-radius: 46rpx 46rpx 38rpx 38rpx;
+}
+
+.maxi-dress {
+  height: 360rpx;
+  border-radius: 46rpx 46rpx 76rpx 76rpx;
+}
+
+.accessory {
+  z-index: 8;
+}
+
+.mini-bag {
+  width: 58rpx;
+  height: 58rpx;
+  right: 66rpx;
+  top: 328rpx;
+  border-radius: 20rpx;
+  background: #ffeab5;
+  box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.mini-bag::before {
+  content: '';
+  position: absolute;
+  left: 10rpx;
+  top: -18rpx;
+  width: 38rpx;
+  height: 24rpx;
+  border: 4rpx solid #c68f33;
+  border-bottom: 0;
+  border-radius: 20rpx 20rpx 0 0;
+}
+
+.underarm-bag {
+  width: 76rpx;
+  height: 40rpx;
+  right: 58rpx;
+  top: 340rpx;
+  border-radius: 24rpx 24rpx 18rpx 18rpx;
+  background: #ffeab5;
+}
+
+.underarm-bag::before {
+  content: '';
+  position: absolute;
+  left: 14rpx;
+  top: -12rpx;
+  width: 46rpx;
+  height: 20rpx;
+  border: 4rpx solid #c68f33;
+  border-bottom: 0;
+  border-radius: 20rpx 20rpx 0 0;
+}
+
+.hair-clip {
+  width: 36rpx;
+  height: 16rpx;
+  left: 226rpx;
+  top: 92rpx;
+  border-radius: 12rpx;
+  background: #8fcfff;
+}
+
+.cap {
+  width: 104rpx;
+  height: 34rpx;
+  left: 128rpx;
+  top: 58rpx;
+  background: #8fcfff;
+  border-radius: 36rpx 36rpx 12rpx 12rpx;
+  z-index: 7;
+}
+
+.cap::after {
+  content: '';
+  position: absolute;
+  right: -12rpx;
+  bottom: -6rpx;
+  width: 36rpx;
+  height: 14rpx;
+  border-radius: 14rpx;
+  background: inherit;
+}
+
+.bow {
+  width: 48rpx;
+  height: 28rpx;
+  left: 154rpx;
+  top: 186rpx;
+  background: #ff8cab;
+  border-radius: 16rpx;
+}
+
+.bow::before,
+.bow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 22rpx;
+  height: 28rpx;
+  background: inherit;
+  border-radius: 14rpx;
+}
+
+.bow::before {
+  left: -14rpx;
+}
+
+.bow::after {
+  right: -14rpx;
+}
+
+.heart-earring {
+  width: 18rpx;
+  height: 18rpx;
+  left: 228rpx;
+  top: 130rpx;
+  border-radius: 6rpx 6rpx 12rpx 12rpx;
+  background: #ff8cab;
+  transform: rotate(45deg);
+}
+
+.heart-earring::before,
+.heart-earring::after {
+  content: '';
+  position: absolute;
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.heart-earring::before {
+  left: -8rpx;
+  top: 0;
+}
+
+.heart-earring::after {
+  left: 0;
+  top: -8rpx;
+}
+
+.pearl {
+  width: 36rpx;
+  height: 36rpx;
+  left: 162rpx;
+  top: 208rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255,255,255,0.9);
+}
+
+.badge {
+  width: 34rpx;
+  height: 34rpx;
+  right: 102rpx;
+  top: 254rpx;
+  border-radius: 50%;
+  background: #ffe291;
+  border: 4rpx solid rgba(255,255,255,0.8);
+}
+
+.badge::before {
+  content: '★';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b54569;
+  font-size: 20rpx;
+  font-weight: 700;
+}
+
+.spark {
+  position: absolute;
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 24rpx rgba(255, 255, 255, 0.9);
+  z-index: 0;
+}
+
+.spark-a {
+  left: 42rpx;
+  top: 140rpx;
+}
+
+.spark-b {
+  right: 38rpx;
+  top: 220rpx;
+}
+
+.spark-c {
+  left: 72rpx;
+  top: 304rpx;
+  width: 16rpx;
+  height: 16rpx;
+}
+
+.spark-d {
+  right: 70rpx;
+  top: 108rpx;
+  width: 14rpx;
+  height: 14rpx;
+}
+
+.cream { background: #fff4dd; }
+.rose { background: #ff859f; }
+.peach { background: #ffb6a4; }
+.caramel { background: #d7a269; }
+.mint { background: #9fe5ce; }
+.sky { background: #9dd6ff; }
+.coral { background: #ff95a6; }
+.butter { background: #ffe291; }
+.fog { background: #b8b0b6; }
+.oat { background: #ede2cf; }
+.denim { background: #82a8d9; }
+.matcha { background: #93c08a; }
+.tea { background: #b89074; }
+
+.palette-cream::before,
+.palette-rose::before,
+.palette-peach::before,
+.palette-caramel::before,
+.palette-mint::before,
+.palette-sky::before,
+.palette-coral::before,
+.palette-butter::before,
+.palette-fog::before,
+.palette-oat::before,
+.palette-denim::before,
+.palette-matcha::before,
+.palette-tea::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 45%, rgba(0,0,0,0.08) 100%);
+  pointer-events: none;
+}
+
+.mat-linen {
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.18) 0 4rpx, rgba(0,0,0,0) 4rpx 12rpx),
+    url('/assets/textures/linen-tile.png');
+  background-size: auto, 128rpx 128rpx;
+}
+
+.mat-denim {
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(0,0,0,0.08) 100%),
+    url('/assets/textures/denim-tile.png');
+  background-size: auto, 128rpx 128rpx;
+}
+
+.mat-cotton {
+  box-shadow: inset 0 0 0 4rpx rgba(255,255,255,0.28);
+}
+
+.mat-knit {
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.18) 0 6rpx, rgba(0,0,0,0) 6rpx 14rpx);
+}
+
+.mat-chiffon {
+  opacity: 0.92;
+}
+
+.mat-satin {
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.26) 100%);
+}
+
+.linen-grid::after,
+.denim-diagonal::after,
+.cotton-soft::after,
+.knit-rib::after,
+.chiffon-sheer::after,
+.satin-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.linen-grid::after {
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.12) 0 3rpx, transparent 3rpx 12rpx);
+}
+
+.denim-diagonal::after {
+  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0 6rpx, transparent 6rpx 14rpx);
+}
+
+.cotton-soft::after {
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18) 0%, transparent 40%);
+}
+
+.knit-rib::after {
+  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.12) 0 4rpx, transparent 4rpx 12rpx);
+}
+
+.chiffon-sheer::after {
+  background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 56%, transparent 100%);
+}
+
+.satin-shine::after {
+  background: linear-gradient(120deg, rgba(255,255,255,0.36) 8%, rgba(255,255,255,0) 30%, rgba(255,255,255,0.28) 62%, rgba(255,255,255,0) 88%);
+}
+
+.blouse-puff {
+  border-radius: 42rpx 42rpx 30rpx 30rpx;
+}
+
+.cardigan-crop {
+  border-radius: 38rpx 38rpx 28rpx 28rpx;
+}
+
+.tank-layered {
+  border-radius: 28rpx 28rpx 22rpx 22rpx;
+}
+
+.tee-print::after {
+  content: '♥';
+  position: absolute;
+  left: 56rpx;
+  top: 52rpx;
+  color: rgba(255,255,255,0.82);
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.pleated-skirt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.18) 0 7rpx, transparent 7rpx 20rpx);
+}
+
+.a-line-skirt {
+  height: 136rpx;
+  border-radius: 18rpx 18rpx 28rpx 28rpx;
+}
+
+.denim-skirt {
+  height: 136rpx;
+  border-radius: 18rpx 18rpx 22rpx 22rpx;
+}
+
+.tailored-pants {
+  height: 244rpx;
+  border-radius: 18rpx 18rpx 26rpx 26rpx;
+}
+
+.slip-dress {
+  height: 324rpx;
+  border-radius: 34rpx 34rpx 66rpx 66rpx;
+}
+
+.tea-dress {
+  height: 304rpx;
+  border-radius: 42rpx 42rpx 64rpx 64rpx;
+}
+
+.shirt-dress {
+  height: 314rpx;
+  border-radius: 34rpx 34rpx 58rpx 58rpx;
+}
+
+@keyframes floaty {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12rpx);
+  }
+}

@@ -1,0 +1,38 @@
+<view class="page-shell">
+  <nav-bar showBack="{{true}}" title="分享图预览"></nav-bar>
+
+  <view wx:if="{{poster}}" class="page-content poster-content">
+    <view class="page-lead">
+      <text class="page-lead-title">这页就是你可以发出去的样子。</text>
+      <text class="page-lead-copy">我把操作收轻了一点，保存和重生成都放到卡片右上角，视觉也更像正式海报。</text>
+    </view>
+
+    <view class="hero-card poster-card">
+      <view class="poster-tools">
+        <button class="tool-fab tool-fab--warm" bindtap="savePoster" loading="{{saving}}">
+          <text class="tool-fab__glyph">↓</text>
+        </button>
+        <button class="tool-fab" bindtap="generatePosterFile" loading="{{rendering}}">
+          <text class="tool-fab__glyph">↻</text>
+        </button>
+      </view>
+      <image class="poster-corner poster-corner--left" src="/assets/poster/spark-heart.png" mode="aspectFit"></image>
+      <image class="poster-corner poster-corner--right" src="/assets/poster/comic-star.png" mode="aspectFit"></image>
+      <text class="poster-scene">{{poster.sceneName}}</text>
+      <text class="poster-theme">{{poster.themeTitle}}</text>
+      <text class="poster-vibe">{{poster.themeVibe}}</text>
+      <view class="poster-tags">
+        <text wx:for="{{poster.tags}}" wx:key="*this" class="poster-tag">{{item}}</text>
+      </view>
+      <paper-doll look="{{poster.look}}"></paper-doll>
+      <view class="poster-copy">
+        <text wx:for="{{poster.copyLines}}" wx:key="*this" class="poster-copy-line">{{item}}</text>
+      </view>
+      <text class="poster-footer">今日灵感穿搭 · 发给你的姐妹看这套顺不顺眼</text>
+    </view>
+
+    <text class="poster-status">{{exportReadyPath ? '海报文件已准备好，现在可以直接保存。' : '右上角：向下箭头保存，循环箭头重生成海报文件。'}}</text>
+
+    <canvas id="posterCanvas" canvas-id="posterCanvas" type="2d" class="poster-canvas"></canvas>
+  </view>
+</view>

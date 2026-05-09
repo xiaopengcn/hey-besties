@@ -1,0 +1,36 @@
+.favorites-content {
+  padding-top: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.favorite-card {
+  padding: 28rpx;
+}
+
+.favorite-scene {
+  display: inline-block;
+  padding: 8rpx 16rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 184, 108, 0.2);
+  color: #935117;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.favorite-theme {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 34rpx;
+  line-height: 1.28;
+  font-weight: 800;
+}
+
+.favorite-tags {
+  margin-top: 18rpx;
+}
+
+.favorite-remove {
+  margin-top: 20rpx;
+}
