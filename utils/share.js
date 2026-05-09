@@ -1,6 +1,6 @@
 function createShareMessage(outfit) {
   return {
-    title: `今天是 ${outfit.theme.title}，你也来抽一套穿搭灵感吧`,
+    title: `今天想穿 ${outfit.theme.title}，来陪我抽一套出门灵感`,
     path: `/pages/result/result?scene=${outfit.scene.id}`
   };
 }

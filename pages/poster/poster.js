@@ -36,12 +36,12 @@ Page({
         exportReadyPath: tempFilePath
       });
       wx.showToast({
-        title: '海报已生成',
+        title: '小海报来啦',
         icon: 'success'
       });
     } catch (error) {
       wx.showToast({
-        title: '海报生成失败',
+        title: '小海报迷路啦',
         icon: 'none'
       });
     } finally {
@@ -65,12 +65,12 @@ Page({
         exportReadyPath: tempFilePath
       });
       wx.showToast({
-        title: '已保存到相册',
+        title: '已收进相册',
         icon: 'success'
       });
     } catch (error) {
       wx.showToast({
-        title: '保存失败，请检查权限',
+        title: '相册还没开门',
         icon: 'none'
       });
     } finally {

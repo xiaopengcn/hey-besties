@@ -48,6 +48,33 @@
   font-size: 26rpx;
 }
 
+.weather-chip {
+  margin-top: 18rpx;
+  padding: 18rpx 20rpx;
+  border-radius: 24rpx;
+  background: rgba(143, 207, 255, 0.12);
+  border: 2rpx solid rgba(143, 207, 255, 0.14);
+}
+
+.weather-chip-label,
+.weather-chip-value,
+.weather-summary {
+  display: block;
+}
+
+.weather-chip-label {
+  font-size: 20rpx;
+  font-weight: 700;
+  color: #4f86b6;
+}
+
+.weather-chip-value {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
 .result-tags {
   margin-top: 24rpx;
 }
@@ -58,6 +85,13 @@
   color: #a04d68;
   font-size: 24rpx;
   font-weight: 700;
+}
+
+.weather-summary {
+  margin-top: 12rpx;
+  color: var(--color-ink-soft);
+  font-size: 23rpx;
+  line-height: 1.6;
 }
 
 .panel-head {
@@ -79,12 +113,12 @@
 
 .doll-tools {
   position: absolute;
-  top: 90rpx;
-  right: 24rpx;
+  top: 94rpx;
+  right: 18rpx;
   z-index: 10;
   display: flex;
   flex-direction: column;
-  gap: 12rpx;
+  gap: 14rpx;
 }
 
 .doll-panel-footer {

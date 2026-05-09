@@ -3,26 +3,30 @@
 
   <view class="page-content home-content">
     <view class="page-lead">
-      <text class="page-lead-title">先挑场景，再生成今天那套感觉。</text>
-      <text class="page-lead-copy">像出门前跟最懂你的朋友对一下风格，十秒拿到主题、元素和纸片人预览。</text>
+      <text class="page-lead-title">今天出门，先给衣柜一点小灵感。</text>
+      <text class="page-lead-copy">挑一个马上要去的局，让颜色、材质和小细节自己冒出来。</text>
     </view>
 
     <view class="hero-card home-hero">
       <view class="sticker">OOTD</view>
       <text class="home-hero-title">{{currentScene.name}}</text>
       <text class="home-hero-subtitle">{{currentScene.intro}}</text>
+      <view class="weather-status weather-status--{{weatherContext.status}}">
+        <text class="weather-status-label">天气灵感</text>
+        <text class="weather-status-title">{{weatherTitle}}</text>
+        <text class="weather-status-detail">{{weatherDetail}}</text>
+      </view>
       <view class="hero-badges">
         <text class="hero-badge">{{currentScene.mood}}</text>
         <text class="hero-badge">{{currentScene.buttonText}}</text>
-        <text class="hero-badge">模板换装</text>
+        <text class="hero-badge">小人试衣</text>
       </view>
     </view>
 
     <view class="glass-card scene-panel">
       <view class="scene-panel-head">
         <view>
-          <text class="section-title">挑一个今天的局</text>
-          <text class="section-subtitle">左右滑一滑，选中最像你现在心情的那张卡。</text>
+          <text class="section-title">先定今天的局</text>
         </view>
         <text class="scene-counter">{{selectedIndexLabel}}</text>
       </view>
@@ -46,7 +50,7 @@
       </scroll-view>
     </view>
 
-    <button class="primary-button generate-btn" bindtap="goGenerate">生成今天的穿搭灵感</button>
-    <button class="secondary-button" bindtap="goFavorites">看看我喜欢的结果</button>
+    <button class="primary-button generate-btn" bindtap="goGenerate">抽一套今日出门感</button>
+    <button class="secondary-button" bindtap="goFavorites">翻翻我的心动衣架</button>
   </view>
 </view>

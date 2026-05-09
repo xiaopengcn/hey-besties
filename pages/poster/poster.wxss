@@ -12,10 +12,10 @@
 .poster-tools {
   position: absolute;
   top: 28rpx;
-  right: 24rpx;
+  right: 20rpx;
   z-index: 12;
   display: flex;
-  gap: 12rpx;
+  gap: 14rpx;
 }
 
 .poster-scene {

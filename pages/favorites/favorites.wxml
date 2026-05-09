@@ -1,10 +1,10 @@
 <view class="page-shell">
-  <nav-bar showBack="{{true}}" title="我喜欢的结果"></nav-bar>
+  <nav-bar showBack="{{true}}" title="心动衣架"></nav-bar>
 
   <view class="page-content favorites-content">
     <view wx:if="{{favorites.length === 0}}" class="glass-card empty-state">
-      <text class="section-title">还没有收藏</text>
-      <text class="section-subtitle">先去抽一套顺眼的，再回来把它存下来。</text>
+      <text class="section-title">衣架还空着</text>
+      <text class="section-subtitle">先去遇见一套心动的，再把它悄悄挂在这里。</text>
     </view>
 
     <view wx:for="{{favorites}}" wx:key="id" class="glass-card favorite-card">
@@ -17,7 +17,7 @@
           <text class="tag tag--cool">{{item.elements[2]}}</text>
         </view>
       </view>
-      <button class="secondary-button favorite-remove" data-id="{{item.id}}" bindtap="removeFavorite">删除</button>
+      <button class="secondary-button favorite-remove" data-id="{{item.id}}" bindtap="removeFavorite">取下</button>
     </view>
   </view>
 </view>

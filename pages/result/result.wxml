@@ -1,72 +1,86 @@
 <view class="page-shell">
-  <nav-bar showBack="{{true}}" title="今日穿搭灵感"></nav-bar>
+  <nav-bar showBack="{{true}}" title="今日出门灵感"></nav-bar>
 
   <view wx:if="{{outfit}}" class="page-content result-content">
     <view class="page-lead">
       <text class="result-scene-pill">{{outfit.scene.name}} · {{outfit.scene.mood}}</text>
-      <text class="page-lead-title">今天这套感觉，已经帮你搭好了。</text>
-      <text class="page-lead-copy">主题定方向，元素定记忆点，纸片人直接把轮廓和层次给你看明白。</text>
+      <text class="page-lead-title">今天这套，很适合漂亮营业。</text>
+      <text class="page-lead-copy">主题给氛围，元素给小心机，小人先替衣柜试试看。</text>
     </view>
 
     <view class="glass-card result-summary">
-      <text class="result-label">今日主题</text>
+      <text class="result-label">今日主打</text>
       <text class="result-theme">{{outfit.theme.title}}</text>
       <text class="result-vibe">{{outfit.theme.vibe}}</text>
+      <view wx:if="{{weatherSummary}}" class="weather-chip">
+        <text class="weather-chip-label">天气小纸条</text>
+        <text class="weather-chip-value">{{weatherSummary}}</text>
+      </view>
       <view class="tag-row result-tags">
         <text class="tag tag--sweet">{{outfit.elements[0]}}</text>
         <text class="tag tag--warm">{{outfit.elements[1]}}</text>
         <text class="tag tag--cool">{{outfit.elements[2]}}</text>
       </view>
       <text class="result-style-summary">{{styleSummary}}</text>
+      <text wx:if="{{weatherSummary}}" class="weather-summary">{{weatherSummary}}</text>
     </view>
 
     <view class="glass-card doll-panel">
       <view class="panel-head">
-        <text class="section-title">纸片人上身预览</text>
-        <text class="panel-hint">{{outfit.look.route === 'dress' ? '今天是连衣裙路线' : '今天是上下装路线'}}</text>
+        <text class="section-title">小人今日上身</text>
+        <text class="panel-hint">{{outfit.look.route === 'dress' ? '连衣裙氛围在线' : '上下装搭得刚好'}}</text>
       </view>
       <view class="doll-tools">
-        <button class="tool-fab tool-fab--warm" bindtap="reroll">
-          <text class="tool-fab__glyph">↻</text>
-        </button>
-        <button class="tool-fab {{favorite ? 'tool-fab--active' : ''}}" bindtap="toggleFavorite">
-          <text class="tool-fab__glyph">{{favorite ? '♥' : '♡'}}</text>
-        </button>
-        <button class="tool-fab" bindtap="goPoster">
-          <text class="tool-fab__glyph">⇪</text>
-        </button>
+        <view class="tool-orb-wrap">
+          <text class="tool-orb__hint">换换</text>
+          <view class="tool-orb tool-orb--warm" bindtap="reroll">
+            <image class="tool-orb__icon-image" src="/assets/icons/icon-refresh.svg" mode="aspectFit"></image>
+          </view>
+        </view>
+        <view class="tool-orb-wrap">
+          <text class="tool-orb__hint">{{favorite ? '心动中' : '心动'}}</text>
+          <view class="tool-orb {{favorite ? 'tool-orb--active' : ''}}" bindtap="toggleFavorite">
+            <image class="tool-orb__icon-image" src="{{favorite ? '/assets/icons/icon-heart-solid.svg' : '/assets/icons/icon-heart-outline.svg'}}" mode="aspectFit"></image>
+          </view>
+        </view>
+        <view class="tool-orb-wrap">
+          <text class="tool-orb__hint">晒晒</text>
+          <view class="tool-orb" bindtap="goPoster">
+            <image class="tool-orb__icon-image" src="/assets/icons/icon-share.svg" mode="aspectFit"></image>
+          </view>
+        </view>
       </view>
       <paper-doll look="{{outfit.look}}"></paper-doll>
       <view class="doll-panel-footer">
-        <text class="doll-panel-tip">右上角可以直接换一套、收藏，或者去做分享图。</text>
+        <text class="doll-panel-tip">右上角留了换换、心动和晒晒的小开关。</text>
       </view>
     </view>
 
     <view class="glass-card breakdown-panel">
-      <text class="section-title">为什么是这套</text>
+      <text class="section-title">这套的小心思</text>
       <view class="breakdown-list">
         <view class="breakdown-item">
-          <text class="breakdown-key">场景</text>
+          <text class="breakdown-key">今日局</text>
           <text class="breakdown-value">{{outfit.scene.name}} · {{outfit.scene.mood}}</text>
         </view>
         <view class="breakdown-item">
-          <text class="breakdown-key">主线</text>
+          <text class="breakdown-key">氛围</text>
           <text class="breakdown-value">{{outfit.theme.title}}</text>
         </view>
         <view class="breakdown-item">
-          <text class="breakdown-key">执行点</text>
+          <text class="breakdown-key">小细节</text>
           <text class="breakdown-value">{{outfit.summary}}</text>
         </view>
         <view wx:if="{{outfit.look.layers.outerwear}}" class="breakdown-item">
-          <text class="breakdown-key">叠穿加分</text>
-          <text class="breakdown-value">{{outfit.look.layers.outerwear.name}}，让整体更有层次。</text>
+          <text class="breakdown-key">加分层</text>
+          <text class="breakdown-value">{{outfit.look.layers.outerwear.name}}，给整套多一点轻盈层次。</text>
         </view>
       </view>
     </view>
 
     <view class="inline-actions result-actions">
-      <button class="primary-button" bindtap="reroll">再来一套</button>
-      <button class="secondary-button" bindtap="goScenes">重选场景</button>
+      <button class="primary-button" bindtap="reroll">再抽一套</button>
+      <button class="secondary-button" bindtap="goScenes">换个出门局</button>
     </view>
   </view>
 </view>

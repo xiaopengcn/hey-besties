@@ -25,3 +25,22 @@ test('poster model exposes a look summary ready for canvas drawing', () => {
   assert.ok(Array.isArray(poster.copyLines));
   assert.ok(poster.copyLines.length >= 2);
 });
+
+test('poster model includes weather copy when the outfit is weather-aware', () => {
+  const outfit = generateOutfitForScene('date', 0.12, {
+    status: 'ready',
+    cityName: '上海',
+    districtName: '徐汇',
+    temperature: 22,
+    feelsLike: 23,
+    conditionCode: '101',
+    conditionText: '多云',
+    isRaining: false,
+    isHot: false,
+    isCold: false,
+    fetchedAt: 1710000000000
+  });
+  const poster = buildPosterModel(outfit);
+
+  assert.ok(poster.copyLines.some((line) => /上海|22|多云/.test(line)));
+});

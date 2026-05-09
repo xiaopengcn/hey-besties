@@ -10,6 +10,14 @@
     "backgroundColor": "#fff7f4",
     "backgroundTextStyle": "light"
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "看看今天冷暖，给衣柜递一张出门小纸条"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

@@ -1,4 +1,15 @@
 function buildPosterModel(outfit) {
+  const copyLines = [
+    `今日主打：${outfit.theme.title}`,
+    `小元素：${outfit.elements.join(' / ')}`
+  ];
+
+  if (outfit.weatherSummary) {
+    copyLines.push(outfit.weatherSummary);
+  }
+
+  copyLines.push('今日出门灵感 · 和姐妹一起挑漂亮');
+
   return {
     id: outfit.id,
     sceneName: outfit.scene.name,
@@ -11,11 +22,7 @@ function buildPosterModel(outfit) {
       palette: outfit.palette,
       accessory: outfit.look.layers.accessory
     },
-    copyLines: [
-      `今天这套是 ${outfit.theme.title}`,
-      `${outfit.elements.join(' / ')}`,
-      '今日灵感穿搭 · 一起抽到顺眼那套'
-    ],
+    copyLines,
     decorations: [
       {
         key: 'spark-heart',

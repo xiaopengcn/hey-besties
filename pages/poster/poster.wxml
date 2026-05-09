@@ -1,20 +1,26 @@
 <view class="page-shell">
-  <nav-bar showBack="{{true}}" title="分享图预览"></nav-bar>
+  <nav-bar showBack="{{true}}" title="出门小海报"></nav-bar>
 
   <view wx:if="{{poster}}" class="page-content poster-content">
     <view class="page-lead">
-      <text class="page-lead-title">这页就是你可以发出去的样子。</text>
-      <text class="page-lead-copy">我把操作收轻了一点，保存和重生成都放到卡片右上角，视觉也更像正式海报。</text>
+      <text class="page-lead-title">把今天的漂亮灵感，轻轻收进相册。</text>
+      <text class="page-lead-copy">右上角一颗存图，一颗重抽，发给姐妹刚刚好。</text>
     </view>
 
     <view class="hero-card poster-card">
       <view class="poster-tools">
-        <button class="tool-fab tool-fab--warm" bindtap="savePoster" loading="{{saving}}">
-          <text class="tool-fab__glyph">↓</text>
-        </button>
-        <button class="tool-fab" bindtap="generatePosterFile" loading="{{rendering}}">
-          <text class="tool-fab__glyph">↻</text>
-        </button>
+        <view class="tool-orb-wrap">
+          <text class="tool-orb__hint">存图</text>
+          <view class="tool-orb tool-orb--warm {{saving ? 'tool-orb--busy' : ''}}" bindtap="savePoster">
+            <image class="tool-orb__icon-image" src="/assets/icons/icon-download.svg" mode="aspectFit"></image>
+          </view>
+        </view>
+        <view class="tool-orb-wrap">
+          <text class="tool-orb__hint">重抽</text>
+          <view class="tool-orb {{rendering ? 'tool-orb--busy' : ''}}" bindtap="generatePosterFile">
+            <image class="tool-orb__icon-image" src="/assets/icons/icon-refresh.svg" mode="aspectFit"></image>
+          </view>
+        </view>
       </view>
       <image class="poster-corner poster-corner--left" src="/assets/poster/spark-heart.png" mode="aspectFit"></image>
       <image class="poster-corner poster-corner--right" src="/assets/poster/comic-star.png" mode="aspectFit"></image>
@@ -28,10 +34,10 @@
       <view class="poster-copy">
         <text wx:for="{{poster.copyLines}}" wx:key="*this" class="poster-copy-line">{{item}}</text>
       </view>
-      <text class="poster-footer">今日灵感穿搭 · 发给你的姐妹看这套顺不顺眼</text>
+      <text class="poster-footer">今日出门灵感 · 发给姐妹一起挑漂亮</text>
     </view>
 
-    <text class="poster-status">{{exportReadyPath ? '海报文件已准备好，现在可以直接保存。' : '右上角：向下箭头保存，循环箭头重生成海报文件。'}}</text>
+    <text class="poster-status">{{exportReadyPath ? '小海报已经躺进待存区啦。' : '右上角可以存图，也可以再抽一张新感觉。'}}</text>
 
     <canvas id="posterCanvas" canvas-id="posterCanvas" type="2d" class="poster-canvas"></canvas>
   </view>

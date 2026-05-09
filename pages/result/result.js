@@ -8,7 +8,8 @@ Page({
     sceneName: '',
     outfit: null,
     favorite: false,
-    styleSummary: ''
+    styleSummary: '',
+    weatherSummary: ''
   },
   onLoad(options) {
     const app = getApp();
@@ -26,7 +27,8 @@ Page({
       sceneName: outfit.scene.name,
       outfit,
       favorite: isFavorite(outfit.id),
-      styleSummary: this.buildStyleSummary(outfit)
+      styleSummary: this.buildStyleSummary(outfit),
+      weatherSummary: outfit.weatherSummary || ''
     });
   },
   buildStyleSummary(outfit) {
@@ -39,7 +41,8 @@ Page({
     return bits.join(' · ');
   },
   generate(sceneId) {
-    const outfit = generateOutfitForScene(sceneId);
+    const weatherContext = getApp().globalData.weatherContext;
+    const outfit = generateOutfitForScene(sceneId, undefined, weatherContext && weatherContext.status === 'ready' ? weatherContext : null);
     this.setOutfit(outfit);
   },
   reroll() {
