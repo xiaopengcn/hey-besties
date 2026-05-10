@@ -1,5 +1,6 @@
 const scenes = require('../data/scenes');
 const wardrobe = require('../data/wardrobe');
+const companionsData = require('../data/companions');
 
 function normalizeSeed(seed) {
   if (typeof seed === 'number' && seed >= 0) {
@@ -169,7 +170,59 @@ function buildLook(scene, color, material, accent, seed, weatherBias) {
   };
 }
 
-function generateOutfitForScene(sceneId, seedInput, weatherContext) {
+
+// -- Companion outfit generation --
+
+function buildCompanion(companionMode, seed) {
+  const typeDef = companionsData.types[companionMode];
+  if (!typeDef) {
+    return null;
+  }
+
+  const nameIndex = Math.floor((seed + 0.13) * typeDef.names.length) % typeDef.names.length;
+  const companionId = `${typeDef.idPrefix}${Math.round(seed * 10000)}-${Date.now()}`;
+
+  return {
+    id: companionId,
+    name: typeDef.names[nameIndex],
+    type: typeDef.type,
+    mode: companionMode
+  };
+}
+
+function buildCompanionOutfit(seed) {
+  const color = pick(companionsData.companionColors, seed, 0.22);
+  const material = pick(companionsData.companionMaterials, seed, 0.44);
+  const accessory = pick(companionsData.companionAccessories, seed, 0.66);
+  const palette = companionsData.companionPalettes[color] || companionsData.companionPalettes['奶油白'];
+
+  return {
+    color,
+    material,
+    accessory,
+    colorClass: companionsData.companionColorClassMap[color] || 'cream',
+    materialClass: companionsData.companionMaterialClassMap[material] || 'mat-cotton',
+    textureKey: companionsData.companionTextureMap[material] || 'cotton-soft',
+    paletteClass: palette.className
+  };
+}
+
+function buildCompanionSummary(companion, companionOutfit) {
+  if (!companion || !companionOutfit) {
+    return '';
+  }
+
+  const modeLabels = {
+    '崽': '携崽出行',
+    '喵': '携喵出行',
+    '汪': '携汪出行'
+  };
+  const modeLabel = modeLabels[companion.mode] || `携${companion.mode}出行`;
+
+  return `${modeLabel} · ${companion.name} · ${companionOutfit.color} ${companionOutfit.accessory}`;
+}
+
+function generateOutfitForScene(sceneId, seedInput, weatherContext, companionMode) {
   const scene = scenes.find((item) => item.id === sceneId) || scenes[0];
   const seed = normalizeSeed(seedInput);
   const weatherBias = resolveWeatherBias(weatherContext);
@@ -183,7 +236,7 @@ function generateOutfitForScene(sceneId, seedInput, weatherContext) {
   const palette = wardrobe.palettes[color] || wardrobe.palettes['奶油白'];
   const weatherSummary = buildWeatherSummary(weatherContext, weatherBias);
 
-  return {
+  const result = {
     id: `${scene.id}-${Math.round(seed * 10000)}-${createdAt}`,
     scene,
     theme,
@@ -193,12 +246,25 @@ function generateOutfitForScene(sceneId, seedInput, weatherContext) {
     weather: weatherContext && weatherContext.status === 'ready' ? weatherContext : null,
     weatherSummary,
     summary: `${color}、${material}、${accent}`,
-    createdAt
+    createdAt: createdAt
   };
+
+  if (companionMode && companionsData.types[companionMode]) {
+    const companion = buildCompanion(companionMode, seed);
+    const companionOutfit = buildCompanionOutfit(seed);
+
+    result.companionMode = companionMode;
+    result.companion = companion;
+    result.companionOutfit = companionOutfit;
+    result.companionSummary = buildCompanionSummary(companion, companionOutfit);
+    result.summary = result.summary + ' · ' + result.companionSummary;
+  }
+
+  return result;
 }
 
 function createPosterPayload(outfit) {
-  return {
+  const payload = {
     id: outfit.id,
     sceneName: outfit.scene.name,
     sceneMood: outfit.scene.mood,
@@ -209,6 +275,14 @@ function createPosterPayload(outfit) {
     look: outfit.look,
     weatherSummary: outfit.weatherSummary || ''
   };
+
+  if (outfit.companionMode) {
+    payload.companionMode = outfit.companionMode;
+    payload.companion = outfit.companion;
+    payload.companionOutfit = outfit.companionOutfit;
+  }
+
+  return payload;
 }
 
 module.exports = {

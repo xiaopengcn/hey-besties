@@ -7,6 +7,33 @@
       <text class="page-lead-copy">挑一个局，颜色和小心机自己冒出来</text>
     </view>
 
+    <view class="mode-rail">
+      <view
+        wx:for="{{modes}}"
+        wx:key="id"
+        class="mode-card {{selectedMode === item.id ? 'mode-card--active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onModeTap"
+      >
+        <text class="mode-name">{{item.name}}</text>
+        <text class="mode-copy">{{item.copy}}</text>
+        <text class="mode-cta">{{item.cta}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{selectedMode === 'with-x'}}" class="companion-strip">
+      <view
+        wx:for="{{companionModes}}"
+        wx:key="id"
+        class="companion-chip {{selectedCompanionMode === item.id ? 'companion-chip--active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onCompanionTap"
+      >
+        <text class="companion-chip-title">{{item.label}}</text>
+        <text class="companion-chip-copy">{{item.copy}}</text>
+      </view>
+    </view>
+
     <view class="hero-card home-hero">
       <view class="hero-sun-glow"></view>
       <view class="hero-bubbles" aria-hidden="true">
@@ -58,7 +85,7 @@
       </scroll-view>
     </view>
 
-    <button class="primary-button generate-btn" bindtap="goGenerate">抽一套</button>
+    <button class="primary-button generate-btn" bindtap="goGenerate">{{selectedMode === 'food' ? '开饭局' : selectedMode === 'with-x' ? '带上它出门' : '抽一套'}}</button>
     <button class="secondary-button" bindtap="goFavorites">心动衣架</button>
   </view>
 </view>

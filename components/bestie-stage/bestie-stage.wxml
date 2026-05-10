@@ -28,12 +28,15 @@
             data-index="{{index}}"
             bindtap="onCopyTap"
           >
-            <text class="copy-orb__hint">借穿</text>
             <view class="copy-orb copy-orb--warm">
               <image class="copy-orb__icon-image" src="/assets/icons/icon-hand.svg" mode="aspectFit"></image>
             </view>
           </view>
-          <paper-doll look="{{item.outfit.look}}"></paper-doll>
+          <paper-doll
+            look="{{item.outfit.look}}"
+            companion="{{item.outfit.companion}}"
+            companionOutfit="{{item.outfit.companionOutfit}}"
+          ></paper-doll>
         </view>
       </view>
     </swiper-item>

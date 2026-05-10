@@ -1,15 +1,57 @@
 const scenes = require('../../data/scenes');
 const { createWeatherContext, fetchWeatherContext } = require('../../utils/weather');
 
+const modes = [
+  {
+    id: 'classic',
+    name: '经典 OOTD',
+    copy: '今天先漂亮出门',
+    cta: '抽一套'
+  },
+  {
+    id: 'with-x',
+    name: 'OOTD with x',
+    copy: '带上小可爱一起营业',
+    cta: '带上它'
+  },
+  {
+    id: 'food',
+    name: '今天吃什么',
+    copy: '穿好以后，把饭也定了',
+    cta: '开饭局'
+  }
+];
+
+const companionModes = [
+  { id: '崽', label: '携崽', copy: '奶乎乎出门' },
+  { id: '喵', label: '携喵', copy: '软爪子随行' },
+  { id: '汪', label: '携汪', copy: '元气小尾巴' }
+];
+
 Page({
   data: {
     scenes,
+    modes,
+    companionModes,
+    selectedMode: 'classic',
+    selectedCompanionMode: '崽',
     selectedSceneId: scenes[0].id,
     currentScene: scenes[0],
     selectedIndexLabel: `01 / ${String(scenes.length).padStart(2, '0')}`,
     weatherContext: createWeatherContext(),
     weatherTitle: '天气小纸条',
     weatherDetail: '等小纸条签收'
+  },
+  onModeTap(event) {
+    const { id } = event.currentTarget.dataset;
+    this.setData({ selectedMode: id });
+  },
+  onCompanionTap(event) {
+    const { id } = event.currentTarget.dataset;
+    this.setData({
+      selectedMode: 'with-x',
+      selectedCompanionMode: id
+    });
   },
   onLoad() {
     const app = getApp();
@@ -71,8 +113,21 @@ Page({
     return '小纸条走丢了，先看场景搭';
   },
   goGenerate() {
+    if (this.data.selectedMode === 'food') {
+      this.goFood();
+      return;
+    }
+
+    const companion = this.data.selectedMode === 'with-x'
+      ? `&companion=${encodeURIComponent(this.data.selectedCompanionMode)}`
+      : '';
     wx.navigateTo({
-      url: `/pages/result/result?scene=${this.data.selectedSceneId}`
+      url: `/pages/result/result?scene=${this.data.selectedSceneId}${companion}`
+    });
+  },
+  goFood() {
+    wx.navigateTo({
+      url: '/pages/food/food'
     });
   },
   goFavorites() {

@@ -1,0 +1,49 @@
+<view class="page-shell food-page">
+  <nav-bar showBack="{{true}}" title="今天吃什么"></nav-bar>
+
+  <view class="page-content food-content">
+    <view class="page-lead">
+      <text class="result-scene-pill">OOTD 餐饮局</text>
+      <text class="page-lead-title">衣服配好了，饭也别纠结</text>
+      <text class="page-lead-copy">{{actionCopy}}</text>
+    </view>
+
+    <view wx:if="{{statusLine}}" class="status-line">
+      <text>{{statusLine}}</text>
+    </view>
+
+    <view class="glass-card food-round-card">
+      <view class="scene-panel-head">
+        <view>
+          <text class="section-title">{{roundTitle}}</text>
+          <text class="section-subtitle">{{state.totalOptions}} 张菜牌在线等票</text>
+        </view>
+        <text class="scene-counter">ROUND {{state.round}}</text>
+      </view>
+
+      <view class="food-option-grid">
+        <view
+          wx:for="{{options}}"
+          wx:key="id"
+          class="food-option-card {{highlightedIds[item.id] ? 'food-option-card--' + highlightedIds[item.id] : ''}} {{item.id === rollingId ? 'food-option-card--rolling' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="onVoteTap"
+        >
+          <text class="food-emoji">{{item.emoji}}</text>
+          <text class="food-name">{{item.name}}</text>
+          <text class="food-owner">{{item.participantId}} 的提案</text>
+          <view class="tag-row food-tags">
+            <text wx:for="{{item.tags}}" wx:key="*this" class="tag tag--warm">{{item}}</text>
+          </view>
+          <text class="vote-pill">{{item.votes}} 票</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="inline-actions food-actions">
+      <button class="primary-button" bindtap="onAdvanceTap">晋级下一轮</button>
+      <button class="secondary-button" bindtap="onRandomTap">直接抽一个</button>
+    </view>
+    <button class="secondary-button" bindtap="onRestartTap">重新开局</button>
+  </view>
+</view>

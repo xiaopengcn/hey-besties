@@ -40,4 +40,21 @@
 
     <view wx:if="{{look.layers.accessory}}" class="accessory accessory--spread {{look.layers.accessory.shape}}"></view>
   </view>
+
+  <view
+    wx:if="{{companion && companionOutfit}}"
+    class="companion companion--{{companion.type}}"
+  >
+    <view class="companion-shadow"></view>
+    <view class="companion-ear companion-ear-left"></view>
+    <view class="companion-ear companion-ear-right"></view>
+    <view class="companion-body {{companionOutfit.colorClass}} {{companionOutfit.materialClass}} {{companionOutfit.textureKey}}"></view>
+    <view class="companion-face"></view>
+    <view class="companion-snout"></view>
+    <view class="companion-outfit {{companionOutfit.paletteClass}}">
+      <text class="companion-accessory">{{companionOutfit.accessory}}</text>
+    </view>
+    <view class="companion-bandana"></view>
+    <view class="companion-tail"></view>
+  </view>
 </view>

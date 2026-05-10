@@ -27,6 +27,36 @@ function isCloudAvailable() {
   return USE_CLOUD && typeof wx !== 'undefined' && wx.cloud && wx.cloud.database;
 }
 
+function getMiniProgramEnvVersion() {
+  if (typeof wx === 'undefined') {
+    return 'develop';
+  }
+
+  try {
+    if (typeof wx.getAccountInfoSync === 'function') {
+      var accountInfo = wx.getAccountInfoSync();
+      if (accountInfo && accountInfo.miniProgram && accountInfo.miniProgram.envVersion) {
+        return accountInfo.miniProgram.envVersion;
+      }
+    }
+  } catch (e) {}
+
+  if (typeof __wxConfig !== 'undefined' && __wxConfig && __wxConfig.envVersion) {
+    return __wxConfig.envVersion;
+  }
+
+  return 'develop';
+}
+
+function isProductionEnvironment() {
+  var envVersion = getMiniProgramEnvVersion();
+  return envVersion === 'release' || envVersion === 'production';
+}
+
+function shouldUseVirtualBesties() {
+  return !isProductionEnvironment();
+}
+
 // ── Mock storage ──
 
 function getMockStages() {
@@ -62,6 +92,17 @@ function buildSelfParticipant(userInfo, outfit) {
   };
 }
 
+function buildInitialParticipants(userInfo, outfit, sceneId) {
+  var participants = [buildSelfParticipant(userInfo, outfit)];
+
+  if (shouldUseVirtualBesties()) {
+    participants.push(buildMockParticipant(1, outfit, sceneId));
+    participants.push(buildMockParticipant(2, outfit, sceneId));
+  }
+
+  return participants;
+}
+
 // ── Mock implementations (pure, no network) ──
 
 function createStageMock(sceneId, outfit, userInfo) {
@@ -70,11 +111,7 @@ function createStageMock(sceneId, outfit, userInfo) {
   stages[stageId] = {
     _id: stageId,
     sceneId: sceneId,
-    participants: [
-      buildSelfParticipant(userInfo, outfit),
-      buildMockParticipant(1, outfit, sceneId),
-      buildMockParticipant(2, outfit, sceneId)
-    ],
+    participants: buildInitialParticipants(userInfo, outfit, sceneId),
     createdAt: Date.now(),
     updatedAt: Date.now()
   };
@@ -157,13 +194,7 @@ function createStage(sceneId, outfit, userInfo) {
     db.collection(STAGES_COLLECTION).add({
       data: {
         sceneId: sceneId,
-        participants: [{
-          userId: userInfo.userId,
-          nickName: userInfo.nickName,
-          avatarUrl: userInfo.avatarUrl || '',
-          outfit: outfit,
-          joinedAt: Date.now()
-        }],
+        participants: buildInitialParticipants(userInfo, outfit, sceneId),
         createdAt: Date.now(),
         updatedAt: Date.now()
       },
@@ -280,7 +311,7 @@ function updateMyOutfit(stageId, userId, outfit) {
 }
 
 function addMockParticipant(stageId, outfit, sceneId) {
-  if (isCloudAvailable()) {
+  if (!shouldUseVirtualBesties() || isCloudAvailable()) {
     return Promise.resolve();
   }
   try {
@@ -353,5 +384,7 @@ module.exports = {
   leaveStage: leaveStage,
   startPolling: startPolling,
   stopPolling: stopPolling,
-  isCloudAvailable: isCloudAvailable
+  isCloudAvailable: isCloudAvailable,
+  isProductionEnvironment: isProductionEnvironment,
+  shouldUseVirtualBesties: shouldUseVirtualBesties
 };

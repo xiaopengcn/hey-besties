@@ -81,3 +81,101 @@ test('bestie stage marks me explicitly and uses a left-side hand orb for borrow 
   assert.doesNotMatch(stageWxml, /借我穿/);
   assert.match(stageWxss, /left:\s*36rpx/);
 });
+
+test('viral upgrade exposes mode rail, companion entry, and food route', () => {
+  const appJson = readProjectFile('app.json');
+  const homeWxml = readProjectFile('pages/home/home.wxml');
+  const homeJs = readProjectFile('pages/home/home.js');
+
+  assert.match(appJson, /pages\/food\/food/);
+  assert.match(homeWxml, /class="mode-rail"/);
+  assert.match(homeWxml + homeJs, /OOTD with x/);
+  assert.match(homeWxml + homeJs, /携崽|携喵|携汪/);
+  assert.match(homeWxml + homeJs, /今天吃什么/);
+  assert.match(homeJs, /selectedMode/);
+  assert.match(homeJs, /selectedCompanionMode/);
+  assert.match(homeJs, /goFood/);
+});
+
+test('paper doll and result page render companion outfits when present', () => {
+  const resultWxml = readProjectFile('pages/result/result.wxml');
+  const resultJs = readProjectFile('pages/result/result.js');
+  const paperWxml = readProjectFile('components/paper-doll/paper-doll.wxml');
+  const paperWxss = readProjectFile('components/paper-doll/paper-doll.wxss');
+
+  assert.match(resultJs, /options\.companion/);
+  assert.match(resultJs, /companionMode/);
+  assert.match(resultWxml, /companionSummary/);
+  assert.match(resultWxml, /companion="\{\{outfit\.companion\}\}"/);
+  assert.match(resultWxml, /companionOutfit="\{\{outfit\.companionOutfit\}\}"/);
+  assert.match(paperWxml, /class="companion companion--\{\{companion\.type\}\}"/);
+  assert.match(paperWxml, /companion-outfit/);
+  assert.match(paperWxss, /\.companion--baby/);
+  assert.match(paperWxss, /\.companion--cat/);
+  assert.match(paperWxss, /\.companion--dog/);
+});
+
+test('food page has voting, random decision, and round advancement surfaces', () => {
+  const foodWxml = readProjectFile('pages/food/food.wxml');
+  const foodJs = readProjectFile('pages/food/food.js');
+  const foodWxss = readProjectFile('pages/food/food.wxss');
+
+  assert.match(foodWxml, /今天吃什么/);
+  assert.match(foodWxml, /bindtap="onVoteTap"/);
+  assert.match(foodWxml, /bindtap="onAdvanceTap"/);
+  assert.match(foodWxml, /bindtap="onRandomTap"/);
+  assert.match(foodJs, /createFoodSession/);
+  assert.match(foodJs, /castVote/);
+  assert.match(foodJs, /advanceRound/);
+  assert.match(foodJs, /pickRandom/);
+  assert.match(foodWxss, /\.food-option-card/);
+});
+
+test('food page uses 3-column grid and no hero winner card', () => {
+  const foodWxml = readProjectFile('pages/food/food.wxml');
+  const foodWxss = readProjectFile('pages/food/food.wxss');
+
+  // Must use a 3-column grid, not 2 columns
+  assert.match(foodWxss, /grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/);
+
+  // Must NOT have a standalone winner hero card block
+  assert.doesNotMatch(foodWxml, /food-winner/);
+  assert.doesNotMatch(foodWxml, /hero-card/);
+
+  // Must have a status line for random result
+  assert.match(foodWxml, /status-line/);
+  assert.match(foodWxss, /\.status-line/);
+
+  // Must have highlighted/random/selected state classes on grid cards
+  // Template uses dynamic class: food-option-card-- + highlightedIds[item.id]
+  assert.match(foodWxml, /highlightedIds\[item\.id\]/);
+  assert.match(foodWxml, /food-option-card--'/);
+  assert.match(foodWxml, /food-option-card--rolling/);
+  assert.match(foodWxss, /\.food-option-card--selected/);
+  assert.match(foodWxss, /\.food-option-card--rolling/);
+});
+
+test('paper-doll companion has cat/dog structural hooks for triangle shapes', () => {
+  const paperWxml = readProjectFile('components/paper-doll/paper-doll.wxml');
+  const paperWxss = readProjectFile('components/paper-doll/paper-doll.wxss');
+
+  // Cat should have ear and tail elements
+  assert.match(paperWxml, /companion-ear/);
+  assert.match(paperWxml, /companion-tail/);
+  assert.match(paperWxml, /companion-bandana/);
+
+  // CSS should define triangle-based cat/dog shapes
+  assert.match(paperWxss, /\.companion--cat\s+\.companion-ear/);
+  assert.match(paperWxss, /\.companion--dog\s+\.companion-ear/);
+
+  // Border-based triangles used for ears
+  assert.match(paperWxss, /border-left:\s*\d+rpx\s+solid\s+transparent/);
+  assert.match(paperWxss, /border-right:\s*\d+rpx\s+solid\s+transparent/);
+
+  // Dog-specific: bandana element styled differently
+  assert.match(paperWxss, /\.companion--dog\s+\.companion-bandana/);
+
+  // Ensure cat ear styling uses triangles
+  assert.match(paperWxss, /\.companion--cat\s+\.companion-ear\s*\{/);
+  assert.match(paperWxss, /\.companion--dog\s+\.companion-ear\s*\{/);
+});

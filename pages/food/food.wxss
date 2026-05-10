@@ -1,0 +1,132 @@
+.food-content {
+  padding-top: 10rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 22rpx;
+}
+
+/* Status line for random rolling result */
+.status-line {
+  padding: 16rpx 28rpx;
+  border-radius: 24rpx;
+  background: rgba(255,255,255,0.62);
+  text-align: center;
+  font-size: 26rpx;
+  font-weight: 800;
+  color: #b33d61;
+  letter-spacing: 2rpx;
+  animation: statusFade 0.5s ease-in-out;
+}
+
+@keyframes statusFade {
+  0% { opacity: 0; transform: translateY(-8rpx); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.food-round-card {
+  padding: 30rpx 28rpx;
+}
+
+.food-option-grid {
+  margin-top: 26rpx;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16rpx;
+}
+
+.food-option-card {
+  position: relative;
+  min-height: 186rpx;
+  padding: 18rpx 12rpx;
+  border-radius: 24rpx;
+  background: rgba(255,255,255,0.78);
+  border: 2rpx solid rgba(255,255,255,0.9);
+  box-shadow: 0 12rpx 28rpx rgba(255, 111, 145, 0.08);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+.food-option-card:active {
+  transform: scale(0.96);
+}
+
+/* Rolling highlight */
+.food-option-card--rolling {
+  transform: scale(1.06);
+  border-color: #ff8cab;
+  box-shadow: 0 8rpx 30rpx rgba(255, 111, 145, 0.32);
+  z-index: 2;
+}
+
+.food-option-card--trail {
+  border-color: rgba(255, 143, 171, 0.42);
+  box-shadow: 0 8rpx 22rpx rgba(255, 111, 145, 0.18);
+  background: rgba(255, 247, 250, 0.9);
+}
+
+/* Selected final pick */
+.food-option-card--selected {
+  border-color: #ff6b8b;
+  box-shadow: 0 8rpx 34rpx rgba(255, 80, 120, 0.42);
+  background: rgba(255, 240, 246, 0.92);
+  z-index: 3;
+}
+
+.food-option-card--selected::after {
+  content: '✨';
+  position: absolute;
+  right: 10rpx;
+  bottom: 10rpx;
+  font-size: 28rpx;
+  z-index: 1;
+}
+
+.food-emoji,
+.food-name,
+.food-owner {
+  display: block;
+}
+
+.food-emoji {
+  font-size: 36rpx;
+  line-height: 1;
+}
+
+.food-name {
+  margin-top: 10rpx;
+  color: var(--color-ink);
+  font-size: 24rpx;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.food-owner {
+  margin-top: 6rpx;
+  color: var(--color-ink-soft);
+  font-size: 18rpx;
+}
+
+.food-tags {
+  margin-top: 10rpx;
+  gap: 6rpx;
+}
+
+.food-tags .tag {
+  padding: 5rpx 10rpx;
+  font-size: 16rpx;
+}
+
+.vote-pill {
+  position: absolute;
+  right: 10rpx;
+  top: 10rpx;
+  padding: 4rpx 10rpx;
+  border-radius: 999rpx;
+  background: rgba(255,111,145,0.12);
+  color: #b33d61;
+  font-size: 17rpx;
+  font-weight: 800;
+}
+
+.food-actions {
+  margin-top: 2rpx;
+}

@@ -12,7 +12,7 @@ const {
   startPolling,
   stopPolling,
   generateUserId,
-  isCloudAvailable
+  shouldUseVirtualBesties
 } = require('../../utils/stage-service');
 
 Page({
@@ -45,7 +45,8 @@ Page({
       return;
     }
     var sceneId = options.scene || scenes[0].id;
-    this.generate(sceneId);
+    var companionMode = options.companion ? decodeURIComponent(options.companion) : '';
+    this.generate(sceneId, companionMode);
   },
 
   // ── Solo mode ──
@@ -68,17 +69,25 @@ Page({
     }
     bits.push(outfit.elements[0]);
     bits.push(outfit.elements[1]);
+    if (outfit.companionSummary) {
+      bits.push(outfit.companionSummary);
+    }
     return bits.join(' · ');
   },
 
-  generate(sceneId) {
+  generate(sceneId, companionMode) {
     var weatherContext = getApp().globalData.weatherContext;
-    var outfit = generateOutfitForScene(sceneId, undefined, weatherContext && weatherContext.status === 'ready' ? weatherContext : null);
+    var outfit = generateOutfitForScene(
+      sceneId,
+      undefined,
+      weatherContext && weatherContext.status === 'ready' ? weatherContext : null,
+      companionMode || (this.data.outfit && this.data.outfit.companionMode)
+    );
     this.setOutfit(outfit);
   },
 
   reroll() {
-    this.generate(this.data.outfit.scene.id);
+    this.generate(this.data.outfit.scene.id, this.data.outfit.companionMode);
   },
 
   toggleFavorite() {
@@ -102,7 +111,7 @@ Page({
   goBestieStage() {
     var outfit = this.data.outfit;
     var myUserId = generateUserId();
-    var isDev = !isCloudAvailable();
+    var isDev = shouldUseVirtualBesties();
     var self = this;
 
     var userInfo = {
@@ -129,7 +138,7 @@ Page({
 
   enterStageMode(stageId) {
     var myUserId = generateUserId();
-    var isDev = !isCloudAvailable();
+    var isDev = shouldUseVirtualBesties();
     var outfit = getApp().globalData.currentOutfit
       || generateOutfitForScene('besties');
     var self = this;
@@ -206,7 +215,7 @@ Page({
     if (!myOutfit) return;
     var self = this;
 
-    var newOutfit = generateOutfitForScene(myOutfit.scene.id, undefined, myOutfit.weather);
+    var newOutfit = generateOutfitForScene(myOutfit.scene.id, undefined, myOutfit.weather, myOutfit.companionMode);
     newOutfit.id = myOutfit.id;
     newOutfit.createdAt = myOutfit.createdAt;
     this.setData({ outfit: newOutfit });

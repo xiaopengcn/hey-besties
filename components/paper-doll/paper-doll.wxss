@@ -808,3 +808,273 @@
     transform: translateY(-12rpx);
   }
 }
+
+.companion {
+  position: absolute;
+  right: 88rpx;
+  bottom: 120rpx;
+  width: 126rpx;
+  height: 154rpx;
+  z-index: 9;
+  animation: companionFloat 4.2s ease-in-out infinite;
+}
+
+.companion-shadow {
+  position: absolute;
+  left: 10rpx;
+  bottom: -8rpx;
+  width: 104rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 143, 171, 0.22), rgba(255, 143, 171, 0));
+}
+
+.companion-body,
+.companion-face,
+.companion-outfit,
+.companion-ear,
+.companion-snout,
+.companion-bandana,
+.companion-tail {
+  position: absolute;
+}
+
+.companion-body {
+  left: 18rpx;
+  bottom: 18rpx;
+  width: 90rpx;
+  height: 98rpx;
+  border-radius: 48% 48% 42% 42%;
+  border: 4rpx solid rgba(255,255,255,0.55);
+  overflow: hidden;
+}
+
+.companion-face {
+  left: 38rpx;
+  top: 54rpx;
+  width: 50rpx;
+  height: 34rpx;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 14rpx 14rpx, #3f3137 0 4rpx, transparent 5rpx),
+    radial-gradient(circle at 36rpx 14rpx, #3f3137 0 4rpx, transparent 5rpx),
+    linear-gradient(180deg, transparent 0 24rpx, rgba(255, 145, 160, 0.72) 24rpx 28rpx, transparent 28rpx);
+}
+
+.companion-outfit {
+  left: 24rpx;
+  bottom: 28rpx;
+  width: 78rpx;
+  min-height: 36rpx;
+  padding: 6rpx 8rpx;
+  border-radius: 18rpx;
+  background: rgba(255,255,255,0.38);
+  text-align: center;
+  overflow: hidden;
+}
+
+.companion-accessory {
+  position: relative;
+  z-index: 1;
+  color: rgba(47, 31, 40, 0.64);
+  font-size: 14rpx;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+/* ---- Companion Ears (real elements) ---- */
+.companion-ear {
+  width: 30rpx;
+  height: 34rpx;
+  top: 8rpx;
+}
+
+.companion-ear-left {
+  left: 18rpx;
+}
+
+.companion-ear-right {
+  right: 18rpx;
+}
+
+/* Cat ears: triangle via CSS borders */
+.companion--cat .companion-ear {
+  width: 0;
+  height: 0;
+  border-left: 16rpx solid transparent;
+  border-right: 16rpx solid transparent;
+  border-bottom: 36rpx solid #ffe8d8;
+  background: transparent;
+  top: 0rpx;
+}
+
+.companion--cat .companion-ear-left {
+  left: 18rpx;
+  transform: rotate(-12deg);
+}
+
+.companion--cat .companion-ear-right {
+  right: 18rpx;
+  transform: rotate(12deg);
+}
+
+.companion--cat .companion-ear::after {
+  content: '';
+  position: absolute;
+  top: 14rpx;
+  left: -10rpx;
+  width: 0;
+  height: 0;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
+  border-bottom: 22rpx solid #ffc8b4;
+  pointer-events: none;
+}
+
+/* Dog ears: floppy triangles */
+.companion--dog .companion-ear {
+  width: 0;
+  height: 0;
+  border-left: 14rpx solid transparent;
+  border-right: 14rpx solid transparent;
+  border-bottom: 48rpx solid rgba(129, 89, 66, 0.38);
+  background: transparent;
+  top: 24rpx;
+  border-radius: 0;
+}
+
+.companion--dog .companion-ear-left {
+  left: 10rpx;
+  transform: rotate(18deg);
+}
+
+.companion--dog .companion-ear-right {
+  right: 10rpx;
+  transform: rotate(-18deg);
+}
+
+/* Baby: subtle small ear bumps */
+.companion--baby .companion-ear {
+  width: 18rpx;
+  height: 16rpx;
+  top: 18rpx;
+  border-radius: 50%;
+  background: #ffd7c5;
+  opacity: 0.6;
+}
+
+.companion--baby .companion-ear-left {
+  left: 32rpx;
+}
+
+.companion--baby .companion-ear-right {
+  right: 32rpx;
+}
+
+/* ---- Companion Snout ---- */
+.companion-snout {
+  display: none;
+}
+
+.companion--cat .companion-snout {
+  display: block;
+  left: 36rpx;
+  top: 78rpx;
+  width: 32rpx;
+  height: 18rpx;
+  border-radius: 12rpx;
+  background:
+    radial-gradient(circle at 16rpx 6rpx, #ffb8b8 0 4rpx, transparent 5rpx);
+  z-index: 10;
+}
+
+.companion--dog .companion-snout {
+  display: block;
+  left: 30rpx;
+  top: 76rpx;
+  width: 44rpx;
+  height: 22rpx;
+  border-radius: 14rpx;
+  background:
+    radial-gradient(ellipse at 22rpx 8rpx, #3f3137 0 5rpx, transparent 6rpx);
+  z-index: 10;
+}
+
+/* ---- Companion Bandana (triangle scarf) ---- */
+.companion-bandana {
+  display: none;
+}
+
+.companion--cat .companion-bandana {
+  display: block;
+  left: 20rpx;
+  bottom: 54rpx;
+  width: 0;
+  height: 0;
+  border-left: 28rpx solid transparent;
+  border-right: 28rpx solid transparent;
+  border-bottom: 32rpx solid #ff8cab;
+  opacity: 0.72;
+  z-index: 11;
+}
+
+.companion--dog .companion-bandana {
+  display: block;
+  left: 14rpx;
+  bottom: 50rpx;
+  width: 0;
+  height: 0;
+  border-left: 32rpx solid transparent;
+  border-right: 32rpx solid transparent;
+  border-bottom: 38rpx solid #ff8cab;
+  opacity: 0.78;
+  z-index: 11;
+}
+
+/* ---- Companion Tail ---- */
+.companion-tail {
+  display: none;
+}
+
+.companion--cat .companion-tail {
+  display: block;
+  right: -16rpx;
+  bottom: 48rpx;
+  width: 0;
+  height: 0;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
+  border-bottom: 46rpx solid #ffe8d8;
+  transform: rotate(36deg);
+  z-index: 5;
+}
+
+.companion--dog .companion-tail {
+  display: block;
+  right: -18rpx;
+  bottom: 44rpx;
+  width: 0;
+  height: 0;
+  border-left: 12rpx solid transparent;
+  border-right: 12rpx solid transparent;
+  border-bottom: 42rpx solid rgba(129, 89, 66, 0.32);
+  transform: rotate(30deg);
+  z-index: 5;
+}
+
+.companion--baby .companion-body {
+  border-radius: 48% 48% 46% 46%;
+}
+
+.companion--dog .companion-body {
+  border-radius: 48% 48% 46% 46%;
+}
+
+@keyframes companionFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-10rpx) rotate(1deg);
+  }
+}

@@ -7,6 +7,8 @@ const {
   generateStageId,
   generateUserId,
   isCloudAvailable,
+  isProductionEnvironment,
+  shouldUseVirtualBesties,
   createStage,
   getStage,
   joinStage,
@@ -20,6 +22,13 @@ const {
 function createMockWx() {
   var storage = {};
   return {
+    getAccountInfoSync: function () {
+      return {
+        miniProgram: {
+          envVersion: 'develop'
+        }
+      };
+    },
     cloud: {
       database: null
     },
@@ -174,6 +183,11 @@ test('isCloudAvailable returns false in Node.js', function () {
   assert.equal(isCloudAvailable(), false);
 });
 
+test('non-production defaults enable virtual besties in Node.js', function () {
+  assert.equal(isProductionEnvironment(), false);
+  assert.equal(shouldUseVirtualBesties(), true);
+});
+
 test('MAX_PARTICIPANTS equals 3', function () {
   assert.equal(MAX_PARTICIPANTS, 3);
 });
@@ -206,6 +220,28 @@ test('createStage auto-populates 3 mock participants in dev mode', async functio
     assert.equal(stage.participants[0].userId, userA.userId);
     assert.equal(stage.participants[1].nickName, '小桃');
     assert.equal(stage.participants[2].nickName, '小薄荷');
+  } finally {
+    teardownMockEnv();
+  }
+});
+
+test('createStage in release mode does not auto-populate virtual besties', async function () {
+  var mockWx = setupMockEnv();
+  mockWx.getAccountInfoSync = function () {
+    return {
+      miniProgram: {
+        envVersion: 'release'
+      }
+    };
+  };
+
+  try {
+    var stageId = await createStage('date', sampleOutfit, userA);
+    var stage = await getStage(stageId);
+    assert.equal(isProductionEnvironment(), true);
+    assert.equal(shouldUseVirtualBesties(), false);
+    assert.equal(stage.participants.length, 1);
+    assert.equal(stage.participants[0].userId, userA.userId);
   } finally {
     teardownMockEnv();
   }

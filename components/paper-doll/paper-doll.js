@@ -3,6 +3,14 @@ Component({
     look: {
       type: Object,
       value: null
+    },
+    companion: {
+      type: Object,
+      value: null
+    },
+    companionOutfit: {
+      type: Object,
+      value: null
     }
   },
   methods: {
