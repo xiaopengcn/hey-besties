@@ -1,12 +1,4 @@
-const {
-  createFoodSession,
-  getVoteOptions,
-  castVote,
-  advanceRound,
-  pickRandom,
-  getSessionState,
-  getRandomSequence
-} = require('../../utils/food-service');
+var foodService = require('../../utils/food-service');
 
 Page({
   data: {
@@ -36,7 +28,7 @@ Page({
   startSession() {
     this.clearRollingTimer();
     this._rollingTrail = [];
-    const session = createFoodSession();
+    var session = foodService.createFoodSession();
     this.setSession(session, null);
     this.setData({ statusLine: '' });
   },
@@ -49,12 +41,12 @@ Page({
   },
 
   setSession(session, selected) {
-    const state = getSessionState(session);
+    var state = foodService.getSessionState(session);
     this.setData({
-      session,
-      options: getVoteOptions(session),
-      state,
-      selected,
+      session: session,
+      options: foodService.getVoteOptions(session),
+      state: state,
+      selected: selected,
       highlightedIds: selected ? this._buildHighlight(selected) : {},
       roundTitle: this.buildRoundTitle(state),
       actionCopy: state.isFinal ? '今晚就它漂亮上桌' : '把心动票投给它'
@@ -90,27 +82,27 @@ Page({
   },
 
   onVoteTap(event) {
-    const optionId = event.currentTarget.dataset.id;
-    const session = this.data.session;
-    castVote(session, optionId, this.data.voterName);
+    var optionId = event.currentTarget.dataset.id;
+    var session = this.data.session;
+    foodService.castVote(session, optionId, this.data.voterName);
     this.setSession(session, this.data.selected);
   },
 
   onAdvanceTap() {
-    const next = advanceRound(this.data.session);
+    var next = foodService.advanceRound(this.data.session);
     this.setSession(next, null);
   },
 
   onRandomTap() {
-    const session = this.data.session;
-    const options = getVoteOptions(session);
+    var session = this.data.session;
+    var options = foodService.getVoteOptions(session);
     if (!options || options.length === 0) return;
 
-    const ids = options.map(function (o) { return o.id; });
-    const seed = Math.random();
-    const finalPick = pickRandom(session, seed);
-    const finalId = finalPick && finalPick.selected ? finalPick.selected.id : (finalPick ? finalPick.id : null);
-    const sequence = getRandomSequence(ids, seed, finalId);
+    var ids = options.map(function (o) { return o.id; });
+    var seed = Math.random();
+    var finalPick = foodService.pickRandom(session, seed);
+    var finalId = finalPick && finalPick.selected ? finalPick.selected.id : (finalPick ? finalPick.id : null);
+    var sequence = foodService.getRandomSequence(ids, seed, finalId);
 
     this.setData({
       rollingId: null,

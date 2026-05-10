@@ -7,55 +7,62 @@
     </button>
   </view>
 
-  <swiper
-    class="doll-swiper"
-    current="{{currentIndex}}"
-    bindchange="onSwiperChange"
-    duration="300"
-    easing-function="easeOutCubic"
-    indicator-dots="{{false}}"
+  <view
+    class="stage-shell glass-card"
+    bindtouchstart="onStageTouchStart"
+    bindtouchend="onStageTouchEnd"
   >
-    <swiper-item wx:for="{{participants}}" wx:key="userId" class="doll-swiper-item">
-      <view class="doll-card glass-card">
-        <view class="doll-identity-row">
-          <text class="doll-name-pill">{{item.nickName}}</text>
-          <text wx:if="{{item.userId === myUserId}}" class="doll-me-tag">我</text>
+    <view class="stage-glow stage-glow--left"></view>
+    <view class="stage-glow stage-glow--right"></view>
+    <view class="stage-floor"></view>
+
+    <view class="stage-ring">
+      <view
+        wx:for="{{stageSlots}}"
+        wx:key="slotKey"
+        class="stage-slot stage-slot--{{item.position}} {{item.isPlaceholder ? 'stage-slot--placeholder' : ''}} {{item.isActive ? 'stage-slot--active' : ''}}"
+        data-index="{{item.targetIndex}}"
+        bindtap="onSlotTap"
+      >
+        <view wx:if="{{item.isPlaceholder}}" class="stage-slot-empty">
+          <text class="stage-slot-empty-icon">✧</text>
+          <text class="stage-slot-empty-title">等闺蜜入场</text>
+          <text class="stage-slot-empty-copy">分享一下，舞台就会热闹起来</text>
         </view>
-        <view class="doll-stage-wrap">
+
+        <view wx:else class="stage-doll-wrap">
+          <view class="doll-identity-row">
+            <text class="doll-name-pill">{{item.participant.nickName}}</text>
+            <text wx:if="{{item.participant.userId === myUserId}}" class="doll-me-tag">我</text>
+          </view>
+
           <view
-            wx:if="{{item.userId !== myUserId}}"
-            class="copy-orb-wrap"
-            data-index="{{index}}"
+            wx:if="{{item.participant.userId !== myUserId}}"
+            class="copy-orb-wrap copy-orb-wrap--{{item.position}}"
+            data-index="{{item.targetIndex}}"
             bindtap="onCopyTap"
           >
             <view class="copy-orb copy-orb--warm">
               <image class="copy-orb__icon-image" src="/assets/icons/icon-hand.svg" mode="aspectFit"></image>
             </view>
           </view>
+
           <paper-doll
-            look="{{item.outfit.look}}"
-            companion="{{item.outfit.companion}}"
-            companionOutfit="{{item.outfit.companionOutfit}}"
+            look="{{item.participant.outfit.look}}"
+            companion="{{item.participant.outfit.companion}}"
+            companionOutfit="{{item.participant.outfit.companionOutfit}}"
           ></paper-doll>
         </view>
       </view>
-    </swiper-item>
+    </view>
+  </view>
 
-    <swiper-item wx:if="{{participants.length < 3}}" class="doll-swiper-item">
-      <view class="doll-card glass-card doll-card--empty">
-        <text class="empty-icon">✧</text>
-        <text class="empty-title">等闺蜜来</text>
-        <text class="empty-hint">分享邀请卡，闺蜜点开就能入场</text>
-      </view>
-    </swiper-item>
-  </swiper>
-
-  <view class="active-outfit-card glass-card">
-    <text class="section-title">{{participants[currentIndex].outfit.theme.title}}</text>
+  <view wx:if="{{activeParticipant}}" class="active-outfit-card glass-card">
+    <text class="section-title">{{activeParticipant.outfit.theme.title}}</text>
     <view class="tag-row stage-tags">
-      <text class="tag tag--sweet">{{participants[currentIndex].outfit.elements[0]}}</text>
-      <text class="tag tag--warm">{{participants[currentIndex].outfit.elements[1]}}</text>
-      <text class="tag tag--cool">{{participants[currentIndex].outfit.elements[2]}}</text>
+      <text class="tag tag--sweet">{{activeParticipant.outfit.elements[0]}}</text>
+      <text class="tag tag--warm">{{activeParticipant.outfit.elements[1]}}</text>
+      <text class="tag tag--cool">{{activeParticipant.outfit.elements[2]}}</text>
     </view>
   </view>
 

@@ -70,16 +70,31 @@ test('visible product copy keeps a fresh editorial tone', () => {
   assert.doesNotMatch(visibleCopy, /海报生成失败|保存失败|天气获取失败|删除/);
 });
 
-test('bestie stage marks me explicitly and uses a left-side hand orb for borrow actions', () => {
+test('bestie stage uses a same-screen multi-doll stage with rotating slots', () => {
   const stageWxml = readProjectFile('components/bestie-stage/bestie-stage.wxml');
   const stageWxss = readProjectFile('components/bestie-stage/bestie-stage.wxss');
+  const stageJs = readProjectFile('components/bestie-stage/bestie-stage.js');
 
-  assert.match(stageWxml, /class="doll-me-tag"/);
-  assert.match(stageWxml, /class="copy-orb-wrap"/);
+  assert.match(stageWxml, /class="stage-shell glass-card"/);
+  assert.match(stageWxml, /bindtouchstart="onStageTouchStart"/);
+  assert.match(stageWxml, /bindtouchend="onStageTouchEnd"/);
+  assert.match(stageWxml, /class="stage-ring"/);
+  assert.match(stageWxml, /class="stage-slot stage-slot--\{\{item\.position\}\}/);
+  assert.doesNotMatch(stageWxml, /<swiper/);
+  assert.doesNotMatch(stageWxml, /<swiper-item/);
+  assert.match(stageWxml, /class="copy-orb-wrap copy-orb-wrap--\{\{item\.position\}\}"/);
   assert.match(stageWxml, /class="copy-orb[^"]*"/);
   assert.match(stageWxml, /icon-hand\.svg/);
-  assert.doesNotMatch(stageWxml, /借我穿/);
-  assert.match(stageWxss, /left:\s*36rpx/);
+  assert.match(stageWxml, /stage-slot-empty/);
+  assert.match(stageWxml, /class="doll-me-tag"/);
+  assert.match(stageWxss, /\.stage-slot--left/);
+  assert.match(stageWxss, /\.stage-slot--center/);
+  assert.match(stageWxss, /\.stage-slot--right/);
+  assert.match(stageWxss, /\.copy-orb-wrap--center/);
+  assert.match(stageJs, /function buildStageSlots/);
+  assert.match(stageJs, /shiftStage/);
+  assert.match(stageJs, /onStageTouchStart/);
+  assert.match(stageJs, /onStageTouchEnd/);
 });
 
 test('viral upgrade exposes mode rail, companion entry, and food route', () => {
